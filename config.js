@@ -22,7 +22,7 @@ window.BP_CONFIG = {
   PHONE: "",                         // 任意（空なら表示しない）
   BUSINESS_HOURS: "10:00〜18:00（土日祝を除く）",
   REPLY_WITHIN: "24時間以内",
-  SITE_URL: "https://example.com/",  // 本番ドメイン（末尾スラッシュ）。www は作らない方針
+  SITE_URL: "https://bestprice-kaitori.com/",  // 本番ドメイン（末尾スラッシュ）。www は作らない方針
 
   // --- 手数料の設計値（docs/DESIGN.md §8 と一致させる） ---
   FEE_RATE: 0.20,          // 全部込み手数料（オークション実費を含む）
