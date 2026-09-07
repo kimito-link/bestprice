@@ -12,13 +12,13 @@ window.BP_CONFIG = {
   COMPANY_NAME: "株式会社ベストトラスト",
   REPRESENTATIVE: "小林孝至",
   ADDRESS: "長野県岡谷市長地柴宮二丁目5番65号",
-  SHIP_TO: "[お届け先住所を記入（警察署に届け出た営業所）]",
+  SHIP_TO: "長野県岡谷市長地柴宮二丁目5番65号 株式会社ベストトラスト 宛",
   PUBLIC_SAFETY_COMMISSION: "長野県公安委員会",
   LICENSE_NO: "481212600002",
 
   // --- 受付窓口 ---
   LINE_URL: "",                      // 例: "https://lin.ee/xxxxxxx"。空なら メール受付にフォールバック
-  CONTACT_EMAIL: "[受付メールアドレスを記入]",
+  CONTACT_EMAIL: "info@best-trust.biz",
   PHONE: "",                         // 任意（空なら表示しない）
   BUSINESS_HOURS: "10:00〜18:00（土日祝を除く）",
   REPLY_WITHIN: "24時間以内",
