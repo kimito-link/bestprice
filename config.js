@@ -9,12 +9,12 @@ window.BP_CONFIG = {
   SERVICE_SUB: "買取代行（お預かり販売）",
 
   // --- 事業者（古物営業法の表示義務・特商法表記に使う） ---
-  COMPANY_NAME: "[法人名を記入]",
-  REPRESENTATIVE: "[代表者名を記入]",
-  ADDRESS: "[本店所在地を記入]",
+  COMPANY_NAME: "株式会社ベストトラスト",
+  REPRESENTATIVE: "小林孝至",
+  ADDRESS: "長野県岡谷市長地柴宮二丁目5番65号",
   SHIP_TO: "[お届け先住所を記入（警察署に届け出た営業所）]",
-  PUBLIC_SAFETY_COMMISSION: "[○○県公安委員会（許可証のとおりに記入）]",
-  LICENSE_NO: "[許可番号を記入]",
+  PUBLIC_SAFETY_COMMISSION: "長野県公安委員会",
+  LICENSE_NO: "481212600002",
 
   // --- 受付窓口 ---
   LINE_URL: "",                      // 例: "https://lin.ee/xxxxxxx"。空なら メール受付にフォールバック
