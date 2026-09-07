@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <!-- OGP: og:image は絶対URLが必須。画像ができるまでは入れない（相対パスや存在しない画像は全SNSが無視する） -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="送るだけ。業者オークションで、あなたの代わりに売ります。" />
+  <meta property="og:description" content="対面なし・写真を送るだけで落札の目安額を24時間以内に返信。手数料は全部込み20%。古物商許可のある法人が運営。長野県諏訪・岡谷・塩尻・下諏訪から全国対応。" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta name="twitter:card" content="summary" />
+  <title>ベストプライス — 送るだけの買取代行（お預かり販売）</title>
+  <meta name="description" content="写真を送るだけで、業者向けオークションでの落札目安を24時間以内に返信。対面なし・宅配で送るだけ・手数料は全部込み20%。古物商許可のある法人が運営。長野県諏訪・岡谷・塩尻・下諏訪から全国対応。" />
+  <meta name="theme-color" content="#fffaf4" />
+  <style>
+    :root{--bg:#fffaf4;--band:#fff3e6;--ink:#1f2a37;--muted:#5b6672;--navy:#1c4b7d;--deep:#14375c;--orange:#c8721c;--line:#e8dccb;--ok:#2e7d32;--todo:#fff3a0}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.75;font-size:16px;-webkit-text-size-adjust:100%}
+    a{color:var(--navy)}
+    .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+    header.top{position:sticky;top:0;background:rgba(255,250,244,.93);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:10}
+    header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px}
+    .brand{font-weight:800;color:var(--deep);font-size:1.15rem;text-decoration:none;letter-spacing:.02em;line-height:1.2}
+    .brand small{display:block;font-weight:500;font-size:.72rem;color:var(--muted)}
+    .btn{display:inline-block;padding:14px 22px;border-radius:999px;font-weight:700;text-decoration:none;text-align:center;border:2px solid transparent;line-height:1.3}
+    .btn-primary{background:var(--orange);color:#fff}
+    .btn-primary:hover{background:#a95f16}
+    .btn-ghost{border-color:var(--navy);color:var(--navy);background:transparent}
+    .btn-sm{padding:9px 16px;font-size:.9rem}
+    section{padding:56px 0}
+    section.band{background:var(--band)}
+    h1{font-size:clamp(1.7rem,4.6vw,2.6rem);line-height:1.3;color:var(--deep);margin:0 0 16px}
+    h2{font-size:clamp(1.35rem,3.2vw,1.8rem);color:var(--deep);margin:0 0 8px}
+    h2 + p.lead{margin-top:0}
+    .lead{font-size:1.05rem;color:var(--muted);margin:0 0 24px}
+    .hero{padding:64px 0 48px}
+    .hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 8px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+    .chip{background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:.85rem}
+    .area{font-size:.95rem;color:var(--muted)}
+    .honest{background:#fff;border-left:6px solid var(--orange);padding:18px 20px;border-radius:0 12px 12px 0;margin-top:28px}
+    .honest h3{margin:0 0 6px;color:var(--deep)}
+    .steps{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:14px;counter-reset:s}
+    .steps li{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px 16px 64px;position:relative}
+    .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:16px;top:14px;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;display:grid;place-items:center}
+    .steps b{display:block;color:var(--deep)}
+    .steps .t{font-size:.85rem;color:var(--orange);font-weight:700}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+    .card h3{margin:0 0 6px;font-size:1.02rem;color:var(--deep)}
+    .card p{margin:0;font-size:.9rem;color:var(--muted)}
+    .ng{margin-top:20px;background:#fff;border:1px dashed #c9b8a0;border-radius:12px;padding:14px 18px;font-size:.92rem}
+    .ng b{color:var(--deep)}
+    .fee-big{font-size:clamp(2.4rem,8vw,4rem);font-weight:900;color:var(--orange);line-height:1;margin:8px 0}
+    .sim{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:20px;display:grid;gap:12px;max-width:560px}
+    .sim label{font-weight:700;color:var(--deep)}
+    .sim input{font-size:1.3rem;padding:10px 12px;border:2px solid var(--line);border-radius:10px;width:100%;font-family:inherit}
+    .sim .out{display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:1rem;align-items:baseline}
+    .sim .out .big{font-size:1.6rem;font-weight:900;color:var(--deep)}
+    .note{font-size:.85rem;color:var(--muted)}
+    .checks{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}
+    .checks li{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px 10px 44px;position:relative}
+    .checks li::before{content:"✓";position:absolute;left:14px;top:9px;color:var(--ok);font-weight:900;font-size:1.1rem}
+    details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+    summary{cursor:pointer;font-weight:700;color:var(--deep)}
+    details p,details ul{margin:8px 0 0;font-size:.93rem}
+    .promise{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:20px}
+    .promise .card h3::before{content:"●";color:var(--orange);margin-right:6px}
+    .weak{margin:16px 0 0;padding-left:1.2em}
+    .weak li{margin-bottom:10px}
+    .legal-box{background:#fff;border:2px solid var(--navy);border-radius:12px;padding:16px 20px;font-size:.95rem}
+    .legal-box dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 16px}
+    .legal-box dt{font-weight:700;color:var(--deep)}
+    .legal-box dd{margin:0}
+    .monitor{background:#fff;border:2px solid var(--orange);border-radius:14px;padding:16px 20px;margin-top:20px}
+    .monitor h3{margin:0 0 6px;color:var(--orange)}
+    .monitor p{margin:0}
+    .todo{background:var(--todo);padding:0 4px;border-radius:4px}
+    footer{padding:32px 0 48px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+    footer nav a{margin-right:14px}
+    .cta-final{text-align:center}
+    .cta-final .btn{font-size:1.1rem;padding:18px 32px}
+    @media (max-width:600px){section{padding:44px 0}header.top .btn{display:none}.legal-box dl{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="#top"><span data-cfg="SERVICE_NAME">ベストプライス</span><small><span data-cfg="SERVICE_SUB">買取代行（お預かり販売）</span>・古物商許可 第<span data-cfg="LICENSE_NO"></span>号</small></a>
+      <a class="btn btn-primary btn-sm" data-cta href="#contact">写真を送る（無料）</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <h1>送るだけ。<br />業者オークションで、あなたの代わりに売ります。</h1>
+        <p class="lead">写真を送ると <b data-cfg="REPLY_WITHIN">24時間以内</b> に落札の目安額をお返事。納得したら宅配便で送るだけ。対面はありません。断っても費用は 0 円です。</p>
+        <div class="cta">
+          <a class="btn btn-primary" data-cta href="#contact">写真を送る（無料）</a>
+          <a class="btn btn-ghost" href="#flow">仕組みを見る</a>
+        </div>
+        <p class="note" id="channel-note"></p>
+        <p class="area">長野県 諏訪・岡谷・塩尻・下諏訪 から始めました。宅配便なので全国どこからでも送れます。</p>
+        <div class="chips">
+          <span class="chip">古物商許可のある法人が運営</span>
+          <span class="chip">手数料は全部込み <b data-cfg-pct="FEE_RATE">20%</b></span>
+          <span class="chip">明細を必ずお送りします</span>
+          <span class="chip">到着当日に開封動画を撮影</span>
+        </div>
+        <div class="monitor" data-monitor>
+          <h3>最初の <span data-cfg="MONITOR_SLOTS">10</span> 件は、モニター価格 手数料 <span data-cfg-pct="MONITOR_FEE_RATE">15%</span></h3>
+          <p>始めたばかりなので、実際に送ってくださった方の「落札額・手数料・振込額」の明細と感想を（お名前は伏せて）このページに載せさせてください。その代わり、手数料を <span data-cfg-pct="FEE_RATE">20%</span> → <span data-cfg-pct="MONITOR_FEE_RATE">15%</span> にします。残り <b data-monitor-left>10</b> 件。</p>
+        </div>
+        <div class="honest">
+          <h3>先に正直に書きます</h3>
+          <p style="margin:0">このサービスは始まったばかりで、実績の数字はまだ出せません。だからこそ「落札額・手数料・振込額」の明細を毎回お送りし、どこに出品したかも隠しません。ここで書いている約束は、すべてこのページに残します。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="flow" class="band">
+      <div class="wrap">
+        <h2>流れは5つ。対面はありません。</h2>
+        <p class="lead">「買取店に持ち込む」代わりに、私たちが業者向けのオークションであなたの代わりに売ります。</p>
+        <ol class="steps">
+          <li><span class="t">まず</span><b>写真を6枚送る</b>正面・背面・側面・傷のアップ・型番やシリアル・付属品。撮り方は下にあります。</li>
+          <li><span class="t" data-cfg="REPLY_WITHIN">24時間以内</span><b>落札の目安額をお返事</b>直近の業者オークションの落札相場から「○円〜○円」でお伝えします。確定額ではありません。ここで見送ってもOK（0円）。</li>
+          <li><span class="t">納得したら</span><b>宅配便で送る（元払い）</b>本人確認書類のコピーを同梱してください（法律で決まっています）。追跡番号を教えてもらえれば到着まで見守ります。</li>
+          <li><span class="t">到着当日</span><b>開封動画を撮って検品 → 業者オークションに出品</b>写真と違う点があれば、出品前にご相談します。最低希望額を下回った場合は無料で返送します。</li>
+          <li><span class="t">落札後</span><b>入金確認から3営業日以内にお振込み</b>落札額から手数料（全部込み <span data-cfg-pct="FEE_RATE">20%</span>）を引いた額を、本人名義の口座へ。明細付きです。発送から通常 2〜3週間です。</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="items">
+      <div class="wrap">
+        <h2>送れるもの</h2>
+        <p class="lead">中古市場があるものは、スマホに限らず受け付けます。値段に効くポイントも書いておきます。</p>
+        <div class="grid">
+          <div class="card"><h3>スマホ・タブレット</h3><p>バッテリー最大容量・SIMロック・ネットワーク利用制限「○」が条件。初期化とロック解除をお願いします。</p></div>
+          <div class="card"><h3>ブランドバッグ・財布</h3><p>保証書・ギャランティカード・箱があると相場が大きく変わります。角スレと内側の写真を。</p></div>
+          <div class="card"><h3>腕時計</h3><p>稼働の有無・保証書・コマの数・オーバーホール歴。裏蓋の刻印を1枚。</p></div>
+          <div class="card"><h3>ジュエリー・貴金属</h3><p>刻印（K18・Pt900 等）と重さ。地金はオークションではなく当日相場で地金業者へ出します。</p></div>
+          <div class="card"><h3>カメラ・レンズ</h3><p>マウント面・レンズ内を光にかざした写真。カビ・クモリの有無が値段を決めます。</p></div>
+          <div class="card"><h3>楽器</h3><p>ヘッド・ネック・ブリッジ・電装部・ケース。修理歴があれば教えてください。</p></div>
+          <div class="card"><h3>ゲーム機</h3><p>本体・コントローラー・端子部・電源ON画面。限定モデルは箱があると有利です。</p></div>
+          <div class="card"><h3>家電・オーディオ</h3><p>型番シール（製造年が書いてあります）・端子・電源ON。宅配便で送れるサイズまで。</p></div>
+        </div>
+        <div class="ng">
+          <b>受付できないもの:</b> ネットワーク利用制限が「×」「△」のスマホ／初期化・ロック解除ができないスマホ／真贋が確認できないブランド品／宅配便で送れない大型家電／目安額が <span data-cfg-yen="MIN_ESTIMATE">5,000円</span> 未満のもの（送料のほうが高くなるため）。
+        </div>
+      </div>
+    </section>
+    <section id="fee" class="band">
+      <div class="wrap">
+        <h2>手数料は、ひとつの数字だけ。</h2>
+        <p class="lead">オークションの出品料・成約料・落札料は全部この中に入っています。あとから引かれるものはありません。</p>
+        <div class="fee-big">全部込み <span data-cfg-pct="FEE_RATE">20%</span></div>
+        <p class="note">2回目以降は <span data-cfg-pct="REPEAT_FEE_RATE">17%</span>、ご紹介があれば最低 <span data-cfg-pct="MIN_FEE_RATE">14%</span> まで下がります。落札額 <span data-cfg-yen="BONUS_THRESHOLD">50,000円</span> 以上なら送料分として <span data-cfg-yen="BONUS_AMOUNT">1,000円</span> を上乗せします。</p>
+        <div class="sim">
+          <label for="sim-input">落札額を入れると、振込額の目安が出ます</label>
+          <input id="sim-input" type="text" inputmode="numeric" value="30000" aria-describedby="sim-note" />
+          <div class="out">
+            <span>手数料（全部込み）</span><span id="sim-fee">—</span>
+            <span>送料の上乗せ</span><span id="sim-bonus">—</span>
+            <span><b>お振込み目安（初回）</b></span><span class="big" id="sim-net">—</span>
+            <span>2回目以降なら</span><span id="sim-repeat">—</span>
+          </div>
+          <div class="out" id="sim-monitor-row"><span><b>モニター価格（<span data-cfg-pct="MONITOR_FEE_RATE">15%</span>・残り <span data-monitor-left>10</span> 件）なら</b></span><span class="big" id="sim-monitor">—</span></div>
+          <p class="note" id="sim-note" style="margin:0">落札額は業者オークションの結果で決まります。ここは計算の仕組みを見せるためのもので、金額の約束ではありません。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="photos">
+      <div class="wrap">
+        <h2>写真の撮り方（6枚）</h2>
+        <p class="lead">この6枚があれば、ほぼ目安額が出せます。傷は隠さず先に見せたほうが、到着後に減額されにくく、結果的に得です。</p>
+        <ul class="checks">
+          <li><b>正面全体</b> — 品物が全部入るように</li>
+          <li><b>背面全体</b> — シール跡・改造の有無が分かります</li>
+          <li><b>側面・底面</b> — 角の打痕・歪み</li>
+          <li><b>傷・汚れのアップ</b> — 気になる所を全部。ここが一番大事です</li>
+          <li><b>型番・シリアル・刻印</b> — 相場を調べる鍵になります</li>
+          <li><b>付属品を全部並べたもの</b> — 箱・保証書・ケーブル・替えベルト等</li>
+        </ul>
+        <details><summary>スマホ・タブレットは追加で3枚</summary><ul><li>電源を入れた画面</li><li>設定 → バッテリー → 最大容量の画面</li><li>IMEI の画面（設定 → 一般 → 情報 など）</li></ul><p>キャリア・SIMロックの有無・初期化できるかを一言添えてください。</p></details>
+        <details><summary>ブランド品・時計は追加で</summary><ul><li>内側全体・ロゴ刻印・金具（バッグ・財布）</li><li>文字盤アップ・裏蓋刻印・ブレスのコマ・保証書（時計）</li></ul><p>購入店・購入時期が分かれば書いてください。</p></details>
+        <details><summary>カメラ・楽器・家電は追加で</summary><ul><li>カメラ: マウント面・レンズ内を光にかざした写真・液晶</li><li>楽器: ヘッド・ネック・ブリッジ・電装部・ケース</li><li>家電: 型番シール・端子・電源ON・リモコン</li></ul><p>動作の自覚症状（音が出ない等）はそのまま書いてください。減点ではなく、出品先の選び方が変わるだけです。</p></details>
+      </div>
+    </section>
+
+    <section id="trust" class="band">
+      <div class="wrap">
+        <h2>対面がないからこそ、見えるようにします</h2>
+        <div class="promise">
+          <div class="card"><h3>追跡番号を共有</h3><p>到着・出品・落札・振込の4回、状況をお知らせします。</p></div>
+          <div class="card"><h3>到着当日に開封動画</h3><p>箱を開ける所から撮影して保管します。「送ったものと違う」を防ぐためです。</p></div>
+          <div class="card"><h3>明細を必ず送付</h3><p>落札額・手数料・振込額・出品先の種別（業者オークション／地金業者／卸）を毎回書きます。</p></div>
+          <div class="card"><h3>本人確認は法律どおり</h3><p>古物営業法に基づき、本人確認書類のコピーを頂きます。盗品防止のためで、他の目的には使いません。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="weak">
+      <div class="wrap">
+        <h2>向いていない人</h2>
+        <p class="lead">合わない方に送ってもらっても、お互い損です。</p>
+        <ul class="weak">
+          <li><b>今日中に現金が欲しい方。</b> 私たちは即金の買取ではありません。落札 → 業者からの入金 → お振込み、の順なので、発送から通常 2〜3週間かかります。近くの買取店の方が早いです。</li>
+          <li><b>自分でフリマに出せる方。</b> 個人間フリマの方が高く売れることはあります。手間と時間を掛けたくない方向けのサービスです。</li>
+          <li><b>送料を掛けたくない方。</b> 発送は元払いです。落札額 <span data-cfg-yen="BONUS_THRESHOLD">50,000円</span> 以上で <span data-cfg-yen="BONUS_AMOUNT">1,000円</span> を上乗せしますが、全額ではありません。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="faq" class="band">
+      <div class="wrap">
+        <h2>よくある質問</h2>
+        <details><summary>査定額は誰が決めるのですか？</summary><p>業者向けオークションの落札で決まります。私たちがお伝えするのは直近の落札相場から見た「目安」で、それを高く見せることはしません。</p></details>
+        <details><summary>目安額より低い落札になったら？</summary><p>お送りいただく時に「最低希望額」を決めてもらいます。それを下回る場合は落札させず、送料は当社負担で返送します。</p></details>
+        <details><summary>お金はいつ入りますか？</summary><p>落札確定 → 業者からの入金確認 → 3営業日以内にお振込みです。発送から通常 2〜3週間。予定日は目安額のお返事の中で日付でお伝えします。</p></details>
+        <details><summary>本人確認書類はなぜ必要ですか？</summary><p>古物営業法で定められています。品物と一緒にコピーを1枚同梱してください（運転免許証・マイナンバーカード表面・健康保険証など）。振込先は本人名義の口座に限ります。法定の保管期間が過ぎたら廃棄します。</p></details>
+        <details><summary>キャンセルはできますか？</summary><p>出品前ならできます（返送料はご負担ください）。出品後はキャンセルできません。</p></details>
+        <details><summary>長野県以外からでも送れますか？</summary><p>はい。宅配便なので全国どこからでも同じ流れです。</p></details>
+        <details><summary>手数料以外に費用はかかりますか？</summary><p>かかりません。目安額を見て見送る場合も 0 円です。発送時の送料だけご負担ください。</p></details>
+      </div>
+    </section>
+
+    <section id="contact" class="cta-final">
+      <div class="wrap">
+        <h2>まずは写真を送ってください</h2>
+        <p class="lead">送るかどうかは、目安額を見てから決めてOKです。</p>
+        <a class="btn btn-primary" data-cta href="#contact">写真を送る（無料）</a>
+        <p class="note" style="margin-top:14px">受付時間 <span data-cfg="BUSINESS_HOURS"></span>。お返事は <span data-cfg="REPLY_WITHIN"></span>。<span data-optional="PHONE">電話: <span data-cfg="PHONE"></span></span></p>
+      </div>
+    </section>
+
+    <section id="legal-summary">
+      <div class="wrap">
+        <div class="legal-box">
+          <dl>
+            <dt>名称</dt><dd><span data-cfg="COMPANY_NAME"></span></dd>
+            <dt>古物商許可</dt><dd><span data-cfg="PUBLIC_SAFETY_COMMISSION"></span> 第<span data-cfg="LICENSE_NO"></span>号</dd>
+            <dt>お届け先</dt><dd><span data-cfg="SHIP_TO"></span></dd>
+          </dl>
+          <p class="note" style="margin:10px 0 0">古物営業法に基づく表示です。特定商取引法に基づく表記・本人確認書類の取扱いは <a href="legal.html">こちら</a>。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <nav><a href="#flow">流れ</a><a href="#items">送れるもの</a><a href="#fee">手数料</a><a href="#photos">写真の撮り方</a><a href="#faq">よくある質問</a><a href="legal.html">法定表示</a></nav>
+      <p>© <span id="year"></span> <span data-cfg="COMPANY_NAME"></span></p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="site.js"></script>
+</body>
+</html>
