@@ -16,6 +16,9 @@
   <title>ベストプライス — 送るだけの買取代行（お預かり販売）</title>
   <meta name="description" content="写真を送るだけで、業者向けオークションでの落札目安を24時間以内に返信。対面なし・宅配で送るだけ・手数料は全部込み20%。古物商許可のある法人が運営。長野県諏訪・岡谷・塩尻・下諏訪から全国対応。" />
   <link rel="canonical" href="https://bestprice-kaitori.com/" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="theme-color" content="#fffaf4" />
   <style>
     :root{--bg:#fffaf4;--band:#fff3e6;--ink:#1f2a37;--muted:#5b6672;--navy:#1c4b7d;--deep:#14375c;--orange:#c8721c;--line:#e8dccb;--ok:#2e7d32;--todo:#fff3a0}
@@ -28,6 +31,16 @@
     header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px}
     .brand{font-weight:800;color:var(--deep);font-size:1.15rem;text-decoration:none;letter-spacing:.02em;line-height:1.2}
     .brand small{display:block;font-weight:500;font-size:.72rem;color:var(--muted)}
+    .brand img{display:block;height:44px;width:auto}
+    .lic-grid{display:grid;grid-template-columns:320px 1fr;gap:28px;align-items:start;margin-top:8px}
+    .lic-card{background:#fff;border:4px double var(--navy);padding:18px 20px 16px;position:relative;color:var(--deep)}
+    .lic-card .lic-title{margin:0 0 10px;font-weight:800;letter-spacing:.2em;text-align:center;border-bottom:1px solid var(--line);padding-bottom:8px}
+    .lic-card dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.95rem}
+    .lic-card dt{color:var(--muted);font-weight:500}
+    .lic-card dd{margin:0;font-weight:700;font-variant-numeric:tabular-nums}
+    .lic-card .seal{position:absolute;right:14px;top:12px;width:58px;height:58px;border:3px solid #c1272d;color:#c1272d;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:1rem;transform:rotate(-12deg);opacity:.85;letter-spacing:.05em}
+    .lic-note{font-size:.82rem;color:var(--muted);margin:10px 0 0}
+    @media (max-width:720px){.lic-grid{grid-template-columns:1fr}}
     .btn{display:inline-block;padding:14px 22px;border-radius:999px;font-weight:700;text-decoration:none;text-align:center;border:2px solid transparent;line-height:1.3}
     .btn-primary{background:var(--orange);color:#fff}
     .btn-primary:hover{background:#a95f16}
@@ -99,7 +112,7 @@
 <body>
   <header class="top">
     <div class="wrap">
-      <a class="brand" href="#top"><span data-cfg="SERVICE_NAME">ベストプライス</span><small><span data-cfg="SERVICE_SUB">買取代行（お預かり販売）</span>・古物商許可 第<span data-cfg="LICENSE_NO"></span>号</small></a>
+      <a class="brand" href="#top"><img src="assets/brand/logo.png" alt="ベストプライス 送るだけの買取代行" width="162" height="44" /></a>
       <a class="btn btn-primary btn-sm" data-cta href="#contact">写真を送る（無料）</a>
     </div>
   </header>
@@ -132,7 +145,35 @@
       </div>
     </section>
 
-    <section id="flow" class="band">
+    <section id="license" class="band">
+      <div class="wrap">
+        <div class="lic-grid">
+          <div class="lic-card" aria-label="古物商許可の表示">
+            <span class="seal">許可</span>
+            <p class="lic-title">古物商許可</p>
+            <dl>
+              <dt>許可番号</dt><dd>第<span data-cfg="LICENSE_NO"></span>号</dd>
+              <dt>許可</dt><dd><span data-cfg="PUBLIC_SAFETY_COMMISSION"></span></dd>
+              <dt>名称</dt><dd><span data-cfg="COMPANY_NAME"></span></dd>
+            </dl>
+            <p class="lic-note">古物営業法に基づく表示。詳しくは <a href="legal.html">法定表示</a>。</p>
+          </div>
+          <div>
+            <h2>許可があるから、できること</h2>
+            <p class="lead">使った物を売り買いする仕事は、警察の許可がないとできません。うちは許可のある法人です。だから、次のことができます。</p>
+            <ul class="checks">
+              <li><b>プロだけの市場で売れる</b> — 一般の人は入れない業者オークションに、あなたの代わりに出品します。会社でないと入れない市場もあり、売り先が広いです。値段はプロ同士の競りで決まります。</li>
+              <li><b>「お預かり販売」ができる</b> — 預かって売る（委託）も、許可が要る仕事です。だから先にお金を出さず、売れてから8割を振り込めます。</li>
+              <li><b>本人確認と帳簿を法律どおり</b> — 身分証のコピー・本人名義の口座・帳簿への記録。盗品が混ざらない市場に出すための決まりで、送る人の安心にもなります。</li>
+              <li><b>会社の許可なので、担当が代わっても続く</b> — 1人の資格ではなく、会社が持っている許可です。スタッフは従業者証を持ち、全員が同じルールで動きます。</li>
+              <li><b>許可番号を表示して運営</b> — 番号・法人名・公安委員会名をこのページに出しています。明細を全件お送りし、出品先も隠しません。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="flow">
       <div class="wrap">
         <h2>流れは5つ。対面はありません。</h2>
         <p class="lead">「買取店に持ち込む」代わりに、私たちが業者向けのオークションであなたの代わりに売ります。</p>
@@ -219,13 +260,14 @@
     <section id="more" class="band">
       <div class="wrap">
         <h2>送る以外にも、できること</h2>
-        <p class="lead">うちは買取代行のほかに、お店や会社向けの仕事もしています。品物を送ってくれた方も、お店をやっている方も、そのまま使えます。</p>
+        <p class="lead">運営は <a href="https://best-trust.biz/" target="_blank" rel="noopener">株式会社ベストトラスト</a>。「主役は、あなたのブランド。」を掲げ、風評・検索サジェスト対策、ITインフラ、AI時代のサイト診断を本業でやっている裏方の会社です。だから買取を入口に、お店や会社の困りごとにも同じ窓口で応じられます。</p>
         <div class="grid more-grid">
           <div class="card"><img class="card-img" src="assets/more/more1.webp" alt="お店のカウンターに置かれたノートパソコン" width="768" height="512" loading="lazy" /><h3>お店の口コミ・サイトを無料で診断</h3><p>Googleの口コミの状態、サイトの安全性、社名で検索したときに何が出るか。店名やURLを入れるだけで確認できます。</p><p class="links"><a href="https://reviewcheck.jp/" target="_blank" rel="noopener">口コミチェック</a>・<a href="https://web-health-check.link/" target="_blank" rel="noopener">WEBサイト健康診断</a>・<a href="https://malwarecheck.site/" target="_blank" rel="noopener">マルウェアチェック</a><br />悪い口コミで困っている方は <a href="https://removal-seven.vercel.app/" target="_blank" rel="noopener">評判改善の相談（レビューブースト）</a></p></div>
           <div class="card"><img class="card-img" src="assets/more/more2.webp" alt="お店の倉庫に積まれた在庫の箱" width="768" height="512" loading="lazy" /><h3>お店の在庫・備品の処分も「送るだけ」</h3><p>閉店・改装・季節替えで出た在庫や備品も、同じ流れでお預かりして業者の競りに出します。先にお金を出す必要はありません。まとめての相談もどうぞ。</p><p class="links"><a data-cta-shop href="#contact">お店のことを相談する</a></p></div>
           <div class="card"><img class="card-img" src="assets/more/more3.webp" alt="お店のカウンターに置かれたスマホと案内カード" width="768" height="512" loading="lazy" /><h3>お店の「応援ページ」を作ります</h3><p>来店したお客さんがタップだけで口コミを書ける、お店専用のページ。LINEの案内や買取の受付もひとつにまとめます。</p><p class="links"><a href="https://removal-seven.vercel.app/review-tool.html" target="_blank" rel="noopener">タップで口コミが完成する実物を試す</a>・<a data-cta-shop href="#contact">お店のことを相談する</a></p></div>
+          <div class="card"><img class="card-img" src="assets/more/more4.webp" alt="スマホと手帳と小銭" width="768" height="512" loading="lazy" /><h3>知り合いのお店を紹介して、報酬を受け取る</h3><p>登録は無料。お店が成約すると成約報酬、続く間は継続報酬が入り、管理画面で振込予定額を確認できます。「売る」以外の稼ぎ方です。</p><p class="links"><a href="https://partner.reverse-re-birth-hack.com/" target="_blank" rel="noopener">パートナープログラムを見る</a></p></div>
         </div>
-        <p class="note" style="margin-top:14px">送った後も: 2回目からは手数料 <span data-cfg-pct="REPEAT_FEE_RATE">17%</span>。ご紹介があれば最低 <span data-cfg-pct="MIN_FEE_RATE">14%</span> まで下がります。知り合いのお店には、上の無料診断をそのまま紹介できます。お店を紹介して報酬を受け取りたい方は、<a href="https://partner.reverse-re-birth-hack.com/" target="_blank" rel="noopener">パートナープログラム（登録無料・管理画面で報酬を確認できます）</a>へ。</p>
+        <p class="note" style="margin-top:14px">送った後も: 2回目からは手数料 <span data-cfg-pct="REPEAT_FEE_RATE">17%</span>。ご紹介があれば最低 <span data-cfg-pct="MIN_FEE_RATE">14%</span> まで下がります。知り合いのお店には、上の無料診断をそのまま紹介できます。</p>
       </div>
     </section>
 
