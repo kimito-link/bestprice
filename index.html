@@ -55,6 +55,9 @@
     .steps b{display:block;color:var(--deep)}
     .steps .t{font-size:.85rem;color:var(--orange);font-weight:700}
     .sample-link{display:inline-block;margin-top:6px;font-weight:700}
+    .card-img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:10px;margin-bottom:10px;display:block}
+    .more-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .card .links{margin-top:10px;font-size:.9rem;color:var(--ink)}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}
     .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
     .card h3{margin:0 0 6px;font-size:1.02rem;color:var(--deep)}
@@ -148,14 +151,14 @@
         <h2>送れるもの</h2>
         <p class="lead">中古市場があるものは、スマホに限らず受け付けます。値段に効くポイントも書いておきます。</p>
         <div class="grid">
-          <div class="card"><h3>スマホ・タブレット</h3><p>バッテリー最大容量・SIMロック・ネットワーク利用制限「○」が条件。初期化とロック解除をお願いします。</p></div>
-          <div class="card"><h3>ブランドバッグ・財布</h3><p>保証書・ギャランティカード・箱があると相場が大きく変わります。角スレと内側の写真を。</p></div>
-          <div class="card"><h3>腕時計</h3><p>稼働の有無・保証書・コマの数・オーバーホール歴。裏蓋の刻印を1枚。</p></div>
-          <div class="card"><h3>ジュエリー・貴金属</h3><p>刻印（K18・Pt900 等）と重さ。地金はオークションではなく当日相場で地金業者へ出します。</p></div>
-          <div class="card"><h3>カメラ・レンズ</h3><p>マウント面・レンズ内を光にかざした写真。カビ・クモリの有無が値段を決めます。</p></div>
-          <div class="card"><h3>楽器</h3><p>ヘッド・ネック・ブリッジ・電装部・ケース。修理歴があれば教えてください。</p></div>
-          <div class="card"><h3>ゲーム機</h3><p>本体・コントローラー・端子部・電源ON画面。限定モデルは箱があると有利です。</p></div>
-          <div class="card"><h3>家電・オーディオ</h3><p>型番シール（製造年が書いてあります）・端子・電源ON。宅配便で送れるサイズまで。</p></div>
+          <div class="card"><img class="card-img" src="assets/items/item1.webp" alt="中古のスマホとタブレット" width="768" height="512" loading="lazy" /><h3>スマホ・タブレット</h3><p>バッテリー最大容量・SIMロック・ネットワーク利用制限「○」が条件。初期化とロック解除をお願いします。</p></div>
+          <div class="card"><img class="card-img" src="assets/items/item2.webp" alt="使っていたバッグと財布" width="768" height="512" loading="lazy" /><h3>ブランドバッグ・財布</h3><p>保証書・ギャランティカード・箱があると相場が大きく変わります。角スレと内側の写真を。</p></div>
+          <div class="card"><img class="card-img" src="assets/items/item3.webp" alt="腕時計" width="768" height="512" loading="lazy" /><h3>腕時計</h3><p>稼働の有無・保証書・コマの数・オーバーホール歴。裏蓋の刻印を1枚。</p></div>
+          <div class="card"><img class="card-img" src="assets/items/item4.webp" alt="指輪とネックレス" width="768" height="512" loading="lazy" /><h3>ジュエリー・貴金属</h3><p>刻印（K18・Pt900 等）と重さ。地金はオークションではなく当日相場で地金業者へ出します。</p></div>
+          <div class="card"><img class="card-img" src="assets/items/item5.webp" alt="カメラとレンズ" width="768" height="512" loading="lazy" /><h3>カメラ・レンズ</h3><p>マウント面・レンズ内を光にかざした写真。カビ・クモリの有無が値段を決めます。</p></div>
+          <div class="card"><img class="card-img" src="assets/items/item6.webp" alt="ギター" width="768" height="512" loading="lazy" /><h3>楽器</h3><p>ヘッド・ネック・ブリッジ・電装部・ケース。修理歴があれば教えてください。</p></div>
+          <div class="card"><img class="card-img" src="assets/items/item7.webp" alt="テレビ台とゲーム機まわり" width="768" height="512" loading="lazy" /><h3>ゲーム機</h3><p>本体・コントローラー・端子部・電源ON画面。限定モデルは箱があると有利です。</p></div>
+          <div class="card"><img class="card-img" src="assets/items/item8.webp" alt="スピーカーとヘッドホン" width="768" height="512" loading="lazy" /><h3>家電・オーディオ</h3><p>型番シール（製造年が書いてあります）・端子・電源ON。宅配便で送れるサイズまで。</p></div>
         </div>
         <div class="ng">
           <b>受付できないもの:</b> ネットワーク利用制限が「×」「△」のスマホ／初期化・ロック解除ができないスマホ／真贋が確認できないブランド品／宅配便で送れない大型家電／目安額が <span data-cfg-yen="MIN_ESTIMATE">5,000円</span> 未満のもの（送料のほうが高くなるため）。
@@ -213,6 +216,19 @@
       </div>
     </section>
 
+    <section id="more" class="band">
+      <div class="wrap">
+        <h2>送る以外にも、できること</h2>
+        <p class="lead">うちは買取代行のほかに、お店や会社向けの仕事もしています。品物を送ってくれた方も、お店をやっている方も、そのまま使えます。</p>
+        <div class="grid more-grid">
+          <div class="card"><img class="card-img" src="assets/more/more1.webp" alt="お店のカウンターに置かれたノートパソコン" width="768" height="512" loading="lazy" /><h3>お店の口コミ・サイトを無料で診断</h3><p>Googleの口コミの状態、サイトの安全性、社名で検索したときに何が出るか。店名やURLを入れるだけで確認できます。</p><p class="links"><a href="https://reviewcheck.jp/" target="_blank" rel="noopener">口コミチェック</a>・<a href="https://web-health-check.link/" target="_blank" rel="noopener">WEBサイト健康診断</a>・<a href="https://malwarecheck.site/" target="_blank" rel="noopener">マルウェアチェック</a></p></div>
+          <div class="card"><img class="card-img" src="assets/more/more2.webp" alt="お店の倉庫に積まれた在庫の箱" width="768" height="512" loading="lazy" /><h3>お店の在庫・備品の処分も「送るだけ」</h3><p>閉店・改装・季節替えで出た在庫や備品も、同じ流れでお預かりして業者の競りに出します。先にお金を出す必要はありません。まとめての相談もどうぞ。</p><p class="links"><a data-cta-shop href="#contact">お店のことを相談する</a></p></div>
+          <div class="card"><img class="card-img" src="assets/more/more3.webp" alt="お店のカウンターに置かれたスマホと案内カード" width="768" height="512" loading="lazy" /><h3>お店の「応援ページ」を作ります</h3><p>来店したお客さんがタップだけで口コミを書ける、お店専用のページ。LINEの案内や買取の受付もひとつにまとめます。</p><p class="links"><a data-cta-shop href="#contact">お店のことを相談する</a></p></div>
+        </div>
+        <p class="note" style="margin-top:14px">送った後も: 2回目からは手数料 <span data-cfg-pct="REPEAT_FEE_RATE">17%</span>。ご紹介があれば最低 <span data-cfg-pct="MIN_FEE_RATE">14%</span> まで下がります。知り合いのお店には、上の無料診断をそのまま紹介できます。</p>
+      </div>
+    </section>
+
     <section id="weak">
       <div class="wrap">
         <h2>向いていない人</h2>
@@ -263,7 +279,8 @@
 
   <footer>
     <div class="wrap">
-      <nav><a href="#flow">流れ</a><a href="#items">送れるもの</a><a href="#fee">手数料</a><a href="#photos">写真の撮り方</a><a href="#faq">よくある質問</a><a href="legal.html">法定表示</a></nav>
+      <nav><a href="#flow">流れ</a><a href="#items">送れるもの</a><a href="#fee">手数料</a><a href="#photos">写真の撮り方</a><a href="#more">お店の方へ</a><a href="#faq">よくある質問</a><a href="legal.html">法定表示</a></nav>
+      <p class="note">ページの写真はイメージです。</p>
       <p>© <span id="year"></span> <span data-cfg="COMPANY_NAME"></span></p>
     </div>
   </footer>
