@@ -47,7 +47,10 @@
     .honest{background:#fff;border-left:6px solid var(--orange);padding:18px 20px;border-radius:0 12px 12px 0;margin-top:28px}
     .honest h3{margin:0 0 6px;color:var(--deep)}
     .steps{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:14px;counter-reset:s}
-    .steps li{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px 16px 64px;position:relative}
+    .steps li{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px 16px 64px;position:relative;display:grid;grid-template-columns:1fr 200px;gap:10px 18px;align-items:center}
+    .steps li > div{min-width:0}
+    .step-img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:10px;display:block}
+    @media (max-width:640px){.steps li{grid-template-columns:1fr}.step-img{order:-1}}
     .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:16px;top:14px;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;display:grid;place-items:center}
     .steps b{display:block;color:var(--deep)}
     .steps .t{font-size:.85rem;color:var(--orange);font-weight:700}
@@ -131,11 +134,11 @@
         <h2>流れは5つ。対面はありません。</h2>
         <p class="lead">「買取店に持ち込む」代わりに、私たちが業者向けのオークションであなたの代わりに売ります。</p>
         <ol class="steps">
-          <li><span class="t">まず</span><b>写真を6枚送る</b>正面・背面・側面・傷のアップ・型番やシリアル・付属品。撮り方は下にあります。</li>
-          <li><span class="t" data-cfg="REPLY_WITHIN">24時間以内</span><b>落札の目安額をお返事</b>直近の業者オークションの落札相場から「○円〜○円」でお伝えします。確定額ではありません。ここで見送ってもOK（0円）。<a data-sample-report class="sample-link" href="report.html#eyJ2IjoxLCJpdGVtIjoi77yI6KaL5pys77yJ44K544Oe44O844OI44OV44Kp44OzIiwibG93IjozMDAwMCwiaGlnaCI6MzgwMDAsImQiOiIyMDI2LTA5LTA4IiwiZGl5IjpmYWxzZSwibm90ZSI6Iuimi-acrOOBp-OBmeOAgumHkemhjeOBr-S7ruOBruaVsOWtl-OBp-OBmSIsInNhbXBsZSI6dHJ1ZX0">返事の見本を見る →</a></li>
-          <li><span class="t">納得したら</span><b>宅配便で送る（元払い）</b>本人確認書類のコピーを同梱してください（法律で決まっています）。追跡番号を教えてもらえれば到着まで見守ります。</li>
-          <li><span class="t">到着当日</span><b>開封動画を撮って検品 → 業者オークションに出品</b>写真と違う点があれば、出品前にご相談します。最低希望額を下回った場合は無料で返送します。</li>
-          <li><span class="t">落札後</span><b>入金確認から3営業日以内にお振込み</b>落札額から手数料（全部込み <span data-cfg-pct="FEE_RATE">20%</span>）を引いた額を、本人名義の口座へ。明細付きです。発送から通常 2〜3週間です。</li>
+          <li><div><span class="t">まず</span><b>写真を6枚送る</b>正面・背面・側面・傷のアップ・型番やシリアル・付属品。撮り方は下にあります。</div><img class="step-img" src="assets/steps/step1.webp" alt="スマホで品物の写真を撮る手元" width="768" height="512" loading="lazy" /></li>
+          <li><div><span class="t" data-cfg="REPLY_WITHIN">24時間以内</span><b>落札の目安額をお返事</b>直近の業者オークションの落札相場から「○円〜○円」でお伝えします。確定額ではありません。ここで見送ってもOK（0円）。<a data-sample-report class="sample-link" href="report.html#eyJ2IjoxLCJpdGVtIjoi77yI6KaL5pys77yJ44K544Oe44O844OI44OV44Kp44OzIiwibG93IjozMDAwMCwiaGlnaCI6MzgwMDAsImQiOiIyMDI2LTA5LTA4IiwiZGl5IjpmYWxzZSwibm90ZSI6Iuimi-acrOOBp-OBmeOAgumHkemhjeOBr-S7ruOBruaVsOWtl-OBp-OBmSIsInNhbXBsZSI6dHJ1ZX0">返事の見本を見る →</a></div><img class="step-img" src="assets/steps/step2.webp" alt="目安額の返事が届いたスマホ" width="768" height="512" loading="lazy" /></li>
+          <li><div><span class="t">納得したら</span><b>宅配便で送る（元払い）</b>本人確認書類のコピーを同梱してください（法律で決まっています）。追跡番号を教えてもらえれば到着まで見守ります。</div><img class="step-img" src="assets/steps/step3.webp" alt="箱に詰めた時計（発送前）" width="768" height="512" loading="lazy" /></li>
+          <li><div><span class="t">到着当日</span><b>開封動画を撮って検品 → 業者オークションに出品</b>写真と違う点があれば、出品前にご相談します。最低希望額を下回った場合は無料で返送します。</div><img class="step-img" src="assets/steps/step4.webp" alt="業者オークションの会場" width="768" height="512" loading="lazy" /></li>
+          <li><div><span class="t">落札後</span><b>入金確認から3営業日以内にお振込み</b>落札額から手数料（全部込み <span data-cfg-pct="FEE_RATE">20%</span>）を引いた額を、本人名義の口座へ。明細付きです。発送から通常 2〜3週間です。</div><img class="step-img" src="assets/steps/step5.webp" alt="振込を確かめる通帳とスマホ" width="768" height="512" loading="lazy" /></li>
         </ol>
       </div>
     </section>
