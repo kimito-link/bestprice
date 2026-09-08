@@ -49,6 +49,20 @@
       a.title = "config.js に LINE_URL か CONTACT_EMAIL を入れると有効になります";
     }
   });
+  // 2b) お店向けの相談CTA（在庫・備品の処分／応援ページ／診断）。窓口の切替は写真査定と同じ
+  var shopBody = [
+    "【お店の相談】",
+    "■ 店名: ",
+    "■ 相談したいこと（在庫・備品の処分／応援ページ／口コミ・サイトの診断）: ",
+    "■ 場所（市町村）: ",
+    "■ 連絡のつきやすい時間帯: "
+  ].join("\n");
+  document.querySelectorAll("[data-cta-shop]").forEach(function (a) {
+    if (hasLine) { a.href = C.LINE_URL; a.target = "_blank"; a.rel = "noopener"; }
+    else if (hasMail) { a.href = "mailto:" + C.CONTACT_EMAIL + "?subject=" + encodeURIComponent("お店の相談") + "&body=" + encodeURIComponent(shopBody); }
+    else { a.href = "#contact"; a.classList.add("todo"); a.textContent = "受付窓口 準備中"; }
+  });
+
   var note = document.getElementById("channel-note");
   if (note) note.textContent = hasLine
     ? "LINEに写真を送るだけ。友だち追加は無料です。"
