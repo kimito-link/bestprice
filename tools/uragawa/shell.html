@@ -1,0 +1,100 @@
+<title>「送るだけ」の裏側</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{--bg:#fbf7f0;--surface:#ffffff;--ink:#1f2a37;--muted:#5b6672;--navy:#1c4b7d;--deep:#14375c;--orange:#c8721c;--line:#e3d9c8;--navy-soft:#dfe9f5;--bar:#1c4b7d;--grey:#b8bec6;--focus:#c8721c}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#131c27;--surface:#1b2735;--ink:#eef2f6;--muted:#a9b6c5;--navy:#8fbdf0;--deep:#dbe7f5;--orange:#e69a4a;--line:#2c3b4d;--navy-soft:#263a52;--bar:#2f5f92;--grey:#55606c}}
+  :root[data-theme="dark"]{--bg:#131c27;--surface:#1b2735;--ink:#eef2f6;--muted:#a9b6c5;--navy:#8fbdf0;--deep:#dbe7f5;--orange:#e69a4a;--line:#2c3b4d;--navy-soft:#263a52;--bar:#2f5f92;--grey:#55606c}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;font-size:16px;line-height:1.85}
+  a{color:var(--navy)}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+  .page{max-width:900px;margin:0 auto;padding:40px 22px 80px}
+  .hd,section,.ft{max-width:720px}
+  .eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+  h1{font-family:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;font-size:clamp(2rem,5vw,3rem);line-height:1.25;color:var(--deep);margin:0 0 16px;text-wrap:balance;letter-spacing:.02em}
+  h2{font-family:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;font-size:1.45rem;color:var(--deep);margin:56px 0 12px;padding-top:20px;border-top:1px solid var(--line);text-wrap:balance}
+  .lede{font-size:1.08rem;margin:0 0 24px}
+  p{margin:0 0 14px}
+  strong{color:var(--deep)}
+  .small{font-size:.9rem;color:var(--muted)}
+  .stamp{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;margin:8px 0 0;border:2px solid var(--orange);border-radius:4px;overflow:hidden;background:var(--surface)}
+  .stamp div{padding:10px 14px;border-right:1px solid var(--line)}
+  .stamp div:last-child{border-right:0}
+  .stamp dt{font-size:.72rem;letter-spacing:.1em;color:var(--orange);margin:0}
+  .stamp dd{margin:0;font-weight:700;color:var(--deep);font-variant-numeric:tabular-nums}
+  figure{margin:20px 0 8px;max-width:900px}
+  figure svg{display:block;width:100%;height:auto;color:var(--ink);font-family:inherit}
+  figcaption{font-size:.88rem;color:var(--muted);margin-top:8px;max-width:720px}
+  .sv-box{fill:var(--surface);stroke:var(--navy);stroke-width:1.5}
+  .sv-box-me{fill:var(--navy-soft)}
+  .sv-h{font-size:14px;font-weight:700;fill:var(--ink)}
+  .sv-s{font-size:12px;fill:var(--muted)}
+  .sv-l{font-size:12.5px;fill:var(--ink)}
+  .sv-note{font-size:11.5px;fill:var(--muted)}
+  .sv-onink{fill:#fff}
+  .f-orange{fill:var(--orange)} .s-orange{stroke:var(--orange)} .f-navy{fill:var(--bar)} .f-navy-soft{fill:var(--navy-soft)} .f-grey{fill:var(--grey)} .f-orange-soft{fill:var(--orange);opacity:.35}
+  .sv-tick line{stroke:currentColor;stroke-width:2}
+  .tbl-wrap{overflow-x:auto;margin:12px 0}
+  table{border-collapse:collapse;width:100%;font-size:.92rem;background:var(--surface)}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:.78rem;letter-spacing:.06em;color:var(--muted);font-weight:500;border-bottom:2px solid var(--line)}
+  .ledger{font-size:.82rem;min-width:820px}
+  .three{padding-left:1.4em;margin:8px 0 14px}
+  .three li{margin-bottom:6px}
+  .valves{margin:12px 0 0;display:grid;gap:10px}
+  .valves div{display:grid;grid-template-columns:minmax(160px,220px) 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .valves dt{font-weight:700;color:var(--deep)}
+  .valves dd{margin:0}
+  .ft{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+  /* gate */
+  .gate{min-height:60vh;display:grid;place-items:center;padding:40px 22px}
+  .gate form{width:min(420px,100%);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--orange);padding:28px 26px 24px;display:grid;gap:12px}
+  .gate h1{font-size:1.5rem;margin:0}
+  .gate p{margin:0;font-size:.92rem;color:var(--muted)}
+  .gate input{font:inherit;font-size:1.05rem;padding:10px 12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:4px}
+  .gate button{font:inherit;font-weight:700;padding:12px;border:0;border-radius:4px;background:var(--orange);color:#fff;cursor:pointer}
+  .gate .err{color:var(--orange);font-weight:700;min-height:1.4em}
+  @media (max-width:560px){.valves div{grid-template-columns:1fr;gap:2px}}
+</style>
+<div class="gate" id="gate">
+  <form id="gate-form" autocomplete="off">
+    <p class="eyebrow">ベストプライス ／ 関係者向け</p>
+    <h1>「送るだけ」の裏側</h1>
+    <p>この説明ページは暗号化されています。共有されたパスワードを入力してください。</p>
+    <label for="pw" class="small">パスワード</label>
+    <input id="pw" type="password" required autofocus />
+    <button type="submit">開く</button>
+    <p class="err" id="err" aria-live="polite"></p>
+  </form>
+</div>
+<main class="page" id="main" hidden></main>
+<script type="application/json" id="vault">__VAULT__</script>
+<script>
+(function(){
+  var vault = JSON.parse(document.getElementById("vault").textContent);
+  var b64 = function(s){ return Uint8Array.from(atob(s), function(c){ return c.charCodeAt(0); }); };
+  function unlock(pw){
+    var enc = new TextEncoder();
+    return crypto.subtle.importKey("raw", enc.encode(pw), "PBKDF2", false, ["deriveKey"]).then(function(km){
+      return crypto.subtle.deriveKey({name:"PBKDF2", salt:b64(vault.salt), iterations:vault.iter, hash:"SHA-256"}, km, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+    }).then(function(key){
+      return crypto.subtle.decrypt({name:"AES-GCM", iv:b64(vault.iv)}, key, b64(vault.ct));
+    }).then(function(pt){ return new TextDecoder().decode(pt); });
+  }
+  var gate = document.getElementById("gate"), main = document.getElementById("main"), err = document.getElementById("err"), form = document.getElementById("gate-form"), input = document.getElementById("pw");
+  function show(html, pw){
+    main.innerHTML = html; main.hidden = false; gate.hidden = true;
+    try { sessionStorage.setItem("bp-explain-pw", pw); } catch(e){}
+    window.scrollTo(0,0);
+  }
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault(); err.textContent = "";
+    var pw = input.value.trim();
+    unlock(pw).then(function(html){ show(html, pw); }).catch(function(){ err.textContent = "パスワードが違います。"; input.select(); });
+  });
+  try {
+    var saved = sessionStorage.getItem("bp-explain-pw");
+    if (saved) unlock(saved).then(function(html){ show(html, saved); }).catch(function(){});
+  } catch(e){}
+})();
+</script>
