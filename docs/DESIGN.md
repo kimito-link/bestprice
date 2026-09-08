@@ -320,3 +320,18 @@ B. 今回は見送る（費用はかかりません）
 - LP: `index.html`（リポ直下）／設定: `config.js`（法人名・許可番号・LINE URL 等はここだけ）
 - 法定表示・特商法: `legal.html`
 - 公開手順: `README.md`
+
+---
+
+## 10. うちでやる理由（シナジー・2026-09-08 追記）
+
+新しく作る物はほぼ無い。**github/ 配下にすでにある事業・道具を、買取代行の入口と出口につなぎ直す**。失敗しても道具は残る＝賭け金が小さい（§0-2 と整合）。
+
+| 束 | 実在する資産（リポ） | 買取代行で何に効くか |
+|---|---|---|
+| 集客 | `ouenmovie`／`kimito-link-yukkuri-douga`／`characterlive`（縦型応援動画の量産・3キャラ）、`kimito-link`／`kimitolink-linktree`／`surechigai-romi.link`（君斗りんくのX・LINE・ファン基盤）、`rolex`（時計ユーザー接点） | 広告費ゼロで告知動画を量産。最初の「送ってくれる人」を既存のつながりから。高額時計の委託は rolex 経由（[[kobutsu-license-rolex-design]] 優先度1） |
+| 受付と返事 | `line-bot`（LINE Harness／AI社員・Cloudflare Workers）、`kimito-link-reply-suggest`／`henshin-hisho`／`soushin-suggest.link`（返信の型）、`tsuioku-no-kiroku`（全チャットの記録・AI外部記憶） | 後回しにしたLINE受付は自社製をつなぐだけ。目安額テンプレを秒で出す。2回目の人の履歴を覚えている（LTV） |
+| 運営の自動化 | `ai-hub/bin/domain-connect.mjs`＋Vercel（公開1コマンド）、`web-ios-android`（LP/アプリ/ストア提出の金型・`idea-to-pr.yml`）、`ai-shain-worker`／`telegram-todo-ai`（常駐ワーカー）、`Target-List-maker`（法人リスト収集） | LPは1日で本番（実績）。4回連絡の自動化。地元卸の相見積もり先リストを自動生成（§4-2） |
+| お金と信頼 | `partnership_program_website`／`reviewcheck.jp`／`web-health-check.link`（?ref紹介・継続報酬・Stripe実装済み）、`pincers`／`removal`（Googleクチコミ・評判）、`best-trust.biz`＋古物商許可（[[best-trust-kobutsu-license-facts]]） | 紹介で手数料−3ptを仕組み化。モニター10件の感想を口コミに変える。法人＋許可＋URL届出が信頼の器 |
+
+**順番:** 集客（動画・既存のつながり）→ 受付（メール→フォーム→LINE Harness）→ 運営（4回連絡の自動化）→ お金（紹介報酬の流用）。すべて「発送件数」が出てから段を上げる（§0-2 の階段と同じ）。
