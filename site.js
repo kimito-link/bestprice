@@ -65,7 +65,7 @@
 
   var note = document.getElementById("channel-note");
   if (note) note.textContent = hasLine
-    ? "LINEに写真を送るだけ。友だち追加は無料です。"
+    ? "LINEで写真を6枚送り、最後に「以上」と送ってください。"
     : "メールに写真を添付して送るだけ。LINEでの受付は準備中です。";
 
   // 3) 振込目安の計算（1か所だけ。シミュレーターと report.html の両方がこれを呼ぶ）
