@@ -17,7 +17,7 @@ window.BP_CONFIG = {
   LICENSE_NO: "481212600002",
 
   // --- 受付窓口 ---
-  LINE_URL: "",                      // 例: "https://lin.ee/xxxxxxx"。空なら メール受付にフォールバック
+  LINE_URL: "https://line.me/R/ti/p/@whack", // 株式会社ベストトラスト 公式LINE
   CONTACT_EMAIL: "info@best-trust.biz",
   PHONE: "",                         // 任意（空なら表示しない）
   BUSINESS_HOURS: "10:00〜18:00（土日祝を除く）",
