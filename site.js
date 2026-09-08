@@ -40,6 +40,7 @@
     if (hasLine) {
       a.href = C.LINE_URL; a.target = "_blank"; a.rel = "noopener";
       a.textContent = a.getAttribute("data-line-label") || "LINEで写真を送る（無料）";
+      a.classList.add("is-line");
     } else if (hasMail) {
       a.href = "mailto:" + C.CONTACT_EMAIL + "?subject=" + encodeURIComponent("写真査定の依頼") + "&body=" + encodeURIComponent(mailBody);
       a.textContent = a.getAttribute("data-mail-label") || "メールで写真を送る（無料）";
@@ -58,10 +59,21 @@
     "■ 連絡のつきやすい時間帯: "
   ].join("\n");
   document.querySelectorAll("[data-cta-shop]").forEach(function (a) {
-    if (hasLine) { a.href = C.LINE_URL; a.target = "_blank"; a.rel = "noopener"; }
+    if (hasLine) { a.href = C.LINE_URL; a.target = "_blank"; a.rel = "noopener"; a.classList.add("is-line"); }
     else if (hasMail) { a.href = "mailto:" + C.CONTACT_EMAIL + "?subject=" + encodeURIComponent("お店の相談") + "&body=" + encodeURIComponent(shopBody); }
     else { a.href = "#contact"; a.classList.add("todo"); a.textContent = "受付窓口 準備中"; }
   });
+
+  // 2c) 画面下に固定のLINEバー（LINE_URL があるときだけ）。最後の窓口 #contact が見えている間は引っ込める
+  var bar = document.querySelector("[data-line-bar]");
+  if (bar) {
+    bar.hidden = !hasLine;
+    document.body.classList.toggle("has-line-bar", hasLine);
+    var contact = document.getElementById("contact");
+    if (hasLine && contact && "IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) { bar.classList.toggle("is-away", es[0].isIntersecting); }, { threshold: 0.15 }).observe(contact);
+    }
+  }
 
   var note = document.getElementById("channel-note");
   if (note) note.textContent = hasLine

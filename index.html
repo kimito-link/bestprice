@@ -42,6 +42,20 @@
     .btn-ghost{border-color:rgba(255,255,255,.42);color:#fff;background:rgba(255,255,255,.06)}
     .btn-ghost:hover{background:rgba(255,255,255,.13)}
     .btn-sm{min-height:44px;padding:9px 18px;font-size:.88rem}
+    /* LINE導線はLINEの緑（#06C755）。site.js が LINE_URL のあるときだけ .is-line を付ける */
+    :root{--lineg:#06c755;--lineg-dark:#05a648}
+    .btn.is-line{background:var(--lineg);color:#fff;border-color:transparent;box-shadow:0 12px 30px rgba(6,199,85,.28)}
+    .btn.is-line:hover{background:var(--lineg-dark);box-shadow:0 16px 36px rgba(6,199,85,.34)}
+    .btn.is-line::before,.line-bar .btn::before{content:"";width:1.15em;height:1.15em;flex:none;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M12 3C6.9 3 2.8 6.4 2.8 10.5c0 3.7 3.2 6.8 7.6 7.4.3.1.7.2.8.5.1.3 0 .7 0 1l-.1.8c0 .2-.2.9.8.5s5.2-3.1 7.1-5.3c1.3-1.4 1.9-2.9 1.9-4.9C21.2 6.4 17.1 3 12 3z'/%3E%3C/svg%3E")}
+    .mini.is-line{background:var(--lineg);color:#fff;border-color:var(--lineg)}
+    .mini.is-line .tag{background:#fff;color:var(--lineg-dark)}
+    /* 画面下に固定のLINEバー。#contact（最後の窓口）が見えている間は引っ込める */
+    .line-bar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;align-items:center;justify-content:center;gap:16px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(8,31,52,.94);backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,.12);transition:transform .25s ease}
+    .line-bar.is-away{transform:translateY(110%)}
+    .line-bar .msg{color:#fff;font-size:.9rem;font-weight:700;margin:0}
+    .line-bar .msg small{display:block;font-weight:500;color:rgba(255,255,255,.7);font-size:.78rem}
+    .line-bar .btn{min-height:48px;padding:11px 22px}
+    body.has-line-bar{padding-bottom:calc(74px + env(safe-area-inset-bottom))}
     section{padding:104px 0;position:relative}
     section.band{background:var(--sand)}
     h1,h2,h3{letter-spacing:-.035em}
@@ -213,6 +227,7 @@
       .chips{grid-template-columns:1fr;margin-top:34px}.chip{min-height:0}.monitor,.honest{padding:19px}.lic-card{padding:40px 28px 30px}.lic-card .seal{width:56px;height:56px;right:20px}.lic-card dl{grid-template-columns:1fr;gap:2px}.lic-card dd{margin-bottom:8px}
       .checks,#photos .checks,.grid,.more-grid,.promise{grid-template-columns:1fr}.step-img{aspect-ratio:4/3}.fee-big{font-size:3.45rem}.sim{padding:22px 18px;border-radius:18px}.sim .out{font-size:.88rem}.sim .out .big{font-size:1.38rem}
       .promise .card{min-height:0}.promise .card::before{margin-bottom:20px}.syn-one{align-items:flex-start}.legal-box dl{grid-template-columns:1fr}.cta-final .btn{width:100%}
+      .line-bar{gap:10px;padding:8px 12px calc(8px + env(safe-area-inset-bottom))}.line-bar .msg{display:none}.line-bar .btn{width:100%;min-height:50px}
     }
     @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,#items .card{transition:none}}
   </style>
@@ -309,7 +324,7 @@
           <li><div><span class="t">まず</span><b>写真を6枚送る</b>全体、傷、型番、付属品が分かる写真です。撮り方は下にあります。</div><img class="step-img" src="assets/steps/step1.webp" alt="スマホで品物の写真を撮る手元" width="768" height="512" loading="lazy" /></li>
           <li><div><span class="t" data-cfg="REPLY_WITHIN">24時間以内</span><b>落札の目安額を受け取る</b>直近の落札相場から「○円〜○円」でお伝えします。確定額ではありません。ここで見送れば 0 円です。<a data-sample-report class="sample-link" href="report.html#eyJ2IjoxLCJpdGVtIjoi77yI6KaL5pys77yJ44K544Oe44O844OI44OV44Kp44OzIiwibG93IjozMDAwMCwiaGlnaCI6MzgwMDAsImQiOiIyMDI2LTA5LTA4IiwiZGl5IjpmYWxzZSwibm90ZSI6Iuimi-acrOOBp-OBmeOAgumHkemhjeOBr-S7ruOBruaVsOWtl-OBp-OBmSIsInNhbXBsZSI6dHJ1ZX0">返事の見本を見る →</a></div><img class="step-img" src="assets/steps/step2.webp" alt="目安額の返事が届いたスマホ" width="768" height="512" loading="lazy" /></li>
           <li><div><span class="t">目安額に納得したら</span><b>宅配便で送る（元払い）</b>本人確認書類のコピーを同梱してください。追跡番号を教えてもらえれば、到着まで確認します。</div><img class="step-img" src="assets/steps/step3.webp" alt="箱に詰めた時計（発送前）" width="768" height="512" loading="lazy" /></li>
-          <li><div><span class="t">到着した日</span><b>開封を動画で記録し、検品する</b>写真と違う点があれば、出品前にご相談します。その後、業者オークションへ。最低希望額を下回るときは無料で返送します。</div><img class="step-img" src="assets/steps/step4.webp" alt="業者オークションの会場" width="768" height="512" loading="lazy" /></li>
+          <li><div><span class="t">到着した日</span><b>開封を動画で記録し、検品する</b>写真に写らない裏側・内側・動作まで見ます。写真に無い傷や不具合が見つかったら、出品前に新しい目安額をお伝えします。それが最低希望額を下回るときは、送料当社負担で返送します。</div><img class="step-img" src="assets/steps/step4.webp" alt="業者オークションの会場" width="768" height="512" loading="lazy" /></li>
           <li><div><span class="t">落札・入金後</span><b>入金確認後、3営業日以内にお振込み</b>落札額から全部込み <span data-cfg-pct="FEE_RATE">20%</span> を引き、本人名義の口座へ振り込みます。明細も送ります。発送から通常 2〜3週間です。</div><img class="step-img" src="assets/steps/step5.webp" alt="振込を確かめる通帳とスマホ" width="768" height="512" loading="lazy" /></li>
         </ol>
       </div>
@@ -363,7 +378,7 @@
           <li><b>正面全体</b> — 品物が全部入るように</li>
           <li><b>背面全体</b> — シール跡・改造の有無が分かります</li>
           <li><b>側面・底面</b> — 角の打痕・歪み</li>
-          <li><b>傷・汚れのアップ</b> — 気になる所を全部。ここが一番大事です</li>
+          <li><b>傷・汚れのアップ</b> — 裏側・内側・底も含めて全部。ここが一番大事です。写真に無い傷は、到着後に目安額が変わります</li>
           <li><b>型番・シリアル・刻印</b> — 相場を調べる鍵になります</li>
           <li><b>付属品を全部並べたもの</b> — 箱・保証書・ケーブル・替えベルト等</li>
         </ul>
@@ -424,6 +439,10 @@
       <div class="wrap">
         <h2>よくある質問</h2>
         <details><summary>落札額は誰が決めますか？</summary><p>業者オークションの競りで決まります。写真への返事は、直近の落札相場から出した目安です。確定額ではありません。</p></details>
+        <details>
+          <summary>写真では見えない傷があったら？</summary>
+          <p>写真の目安額は、写真に写っている状態が前提です。到着後に開封動画を撮りながら、裏側・内側・動作など写真に写らない所まで検品します。写真に無い傷や不具合があれば、出品前に新しい目安額をお伝えします。新しい目安が最低希望額を下回るときは、送料当社負担で返送します。黙って減額して出品することはありません。</p>
+        </details>
         <details><summary>最低希望額を下回りそうなら？</summary><p>発送前に最低希望額を決めます。下回る場合は売らず、送料は当社負担で返送します。</p></details>
         <details><summary>お金はいつ入りますか？</summary><p>落札確定 → 業者からの入金確認 → 3営業日以内にお振込み、の順です。発送から通常 2〜3週間です。予定日は、目安額のお返事で日付をお伝えします。</p></details>
         <details><summary>本人確認書類はなぜ必要ですか？</summary><p>古物営業法で決められています。品物と一緒に、コピーを1枚同梱してください。振込先は本人名義の口座に限ります。法定の保管期間が過ぎたら廃棄します。</p></details>
@@ -463,6 +482,10 @@
       <p>© <span id="year"></span> <span data-cfg="COMPANY_NAME"></span></p>
     </div>
   </footer>
+  <div class="line-bar" data-line-bar hidden>
+    <p class="msg">写真6枚で、目安額を<span data-cfg="REPLY_WITHIN"></span>にお返事<small>金額を見てから送るか決められます。見送りは0円</small></p>
+    <a class="btn" data-cta data-line-label="LINEで写真を送る（無料）" href="#contact">LINEで写真を送る（無料）</a>
+  </div>
 
   <script src="config.js"></script>
   <script src="site.js"></script>
