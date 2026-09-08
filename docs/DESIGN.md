@@ -335,3 +335,4 @@ B. 今回は見送る（費用はかかりません）
 | お金と信頼 | `partnership_program_website`／`reviewcheck.jp`／`web-health-check.link`（?ref紹介・継続報酬・Stripe実装済み）、`pincers`／`removal`（Googleクチコミ・評判）、`best-trust.biz`＋古物商許可（[[best-trust-kobutsu-license-facts]]） | 紹介で手数料−3ptを仕組み化。モニター10件の感想を口コミに変える。法人＋許可＋URL届出が信頼の器 |
 
 **順番:** 集客（動画・既存のつながり）→ 受付（メール→フォーム→LINE Harness）→ 運営（4回連絡の自動化）→ お金（紹介報酬の流用）。すべて「発送件数」が出てから段を上げる（§0-2 の階段と同じ）。
+| 横展開（2026-09-08 ユーザー指摘） | `reviewcheck.jp`（口コミチェック＝風評チェック）、`removal`（Google評判・レビューブースト＝口コミ相談）、`web-health-check.link`／`ai-health-check.link`／`malwarecheck.site`（診断） | 買取の相談窓口（LINE・メール）に来た「お店・会社をやっている人」を、風評チェック・口コミ相談・診断へ案内する。逆向き（診断に来たお店の在庫・備品処分→買取代行）もある。窓口と返信の道具は同じ |
