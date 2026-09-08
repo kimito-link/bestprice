@@ -54,19 +54,25 @@
     ? "LINEに写真を送るだけ。友だち追加は無料です。"
     : "メールに写真を添付して送るだけ。LINEでの受付は準備中です。";
 
-  // 3) 振込シミュレーター（落札額 → 手数料 → 振込目安）
+  // 3) 振込目安の計算（1か所だけ。シミュレーターと report.html の両方がこれを呼ぶ）
+  //    落札額 x から手数料 rate を引き、BONUS_THRESHOLD 以上なら送料分 BONUS_AMOUNT を足す。
+  window.BP_calc = function (x, rate) {
+    var bonus = x >= (C.BONUS_THRESHOLD || Infinity) ? (C.BONUS_AMOUNT || 0) : 0;
+    return x - x * (rate || 0) + bonus;
+  };
+
+  // 3a) 振込シミュレーター（落札額 → 手数料 → 振込目安）
   var inp = document.getElementById("sim-input");
   if (inp) {
     var render = function () {
       var x = Number(String(inp.value).replace(/[^0-9]/g, "")) || 0;
       var fee = x * (C.FEE_RATE || 0);
       var bonus = x >= (C.BONUS_THRESHOLD || Infinity) ? (C.BONUS_AMOUNT || 0) : 0;
-      var net = x - fee + bonus;
       document.getElementById("sim-fee").textContent = yen(fee);
       document.getElementById("sim-bonus").textContent = bonus ? "+" + yen(bonus) : "なし（" + yen(C.BONUS_THRESHOLD) + "以上で+" + yen(C.BONUS_AMOUNT) + "）";
-      document.getElementById("sim-net").textContent = yen(net);
-      document.getElementById("sim-repeat").textContent = yen(x - x * (C.REPEAT_FEE_RATE || 0) + bonus);
-      var sm = document.getElementById("sim-monitor"); if (sm) sm.textContent = yen(x - x * (C.MONITOR_FEE_RATE || 0) + bonus);
+      document.getElementById("sim-net").textContent = yen(window.BP_calc(x, C.FEE_RATE));
+      document.getElementById("sim-repeat").textContent = yen(window.BP_calc(x, C.REPEAT_FEE_RATE));
+      var sm = document.getElementById("sim-monitor"); if (sm) sm.textContent = yen(window.BP_calc(x, C.MONITOR_FEE_RATE));
     };
     inp.addEventListener("input", render);
     render();
@@ -78,6 +84,9 @@
   document.querySelectorAll("[data-monitor-left]").forEach(function (el) { el.textContent = String((C.MONITOR_SLOTS || 0) - (C.MONITOR_FILLED || 0)); });
   var simMon = document.getElementById("sim-monitor-row");
   if (simMon) simMon.hidden = !mon;
+
+  // 3c) 「返事の見本を見る」リンク（config で ON/OFF。送付済みのレポートURLには影響しない）
+  document.querySelectorAll("[data-sample-report]").forEach(function (el) { el.hidden = !C.SAMPLE_REPORT_ENABLED; });
 
   // 4) 電話番号は任意表示
   document.querySelectorAll("[data-optional='PHONE']").forEach(function (el) {

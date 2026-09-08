@@ -9,7 +9,9 @@
 | `index.html` | LP本体（静的・外部依存なし） |
 | `legal.html` | 古物営業法の表示・特商法表記・個人情報の取扱い |
 | `config.js` | ★法人名・許可番号・LINE URL・手数料の設計値。**書き換えるのはここだけ** |
-| `site.js` | config の値を画面に流し込む共通スクリプト（ロジックは持たない） |
+| `site.js` | config の値を画面に流し込む共通スクリプト（計算は振込目安 `BP_calc` の1関数だけ持つ） |
+| `report.html` / `report-codec.js` | 目安額の返事のページ版（売り先くらべ）。URL の `#` 以降に入力を base64url で載せる。個人情報の項目なし |
+| `tools/report-maker.html` | 担当者用。目安を入れるとレポートURLと返事メール本文が出る。どこからもリンクしない |
 | `docs/DESIGN.md` | 設計図（正本） |
 
 ## 公開前に埋めるもの（`config.js`）

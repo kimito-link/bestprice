@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>目安額と売り先くらべ — ベストプライス</title>
+  <!--
+    目安額の返事の「ページ版」。payload は location.hash（# の後ろ）の base64url(JSON)。
+    設計: docs/LP-PROFIT-DESIGN.md（A〜G）。hash はサーバーに送られない＝ログにも残らない。
+    ★ここに CTA 一括書き換え用の data 属性（site.js が写真査定の mailto に書き換える印）を付けない。
+    ★payload 由来の文字列は textContent だけで描く（HTML として挿入しない）。
+  -->
+  <style>
+    :root{--bg:#fffaf4;--band:#fff3e6;--ink:#1f2a37;--muted:#5b6672;--navy:#1c4b7d;--deep:#14375c;--orange:#c8721c;--line:#e8dccb;--ok:#2e7d32;--todo:#fff3a0}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.75;font-size:16px;-webkit-text-size-adjust:100%}
+    a{color:var(--navy)}
+    .wrap{max-width:720px;margin:0 auto;padding:0 20px}
+    header.top{border-bottom:1px solid var(--line);background:#fff}
+    header.top .wrap{display:flex;align-items:center;justify-content:space-between;padding:10px 20px}
+    .brand{font-weight:800;color:var(--deep);text-decoration:none}
+    .brand small{display:block;font-weight:500;font-size:.72rem;color:var(--muted)}
+    main{padding:28px 0 56px}
+    h1{font-size:clamp(1.35rem,4vw,1.8rem);color:var(--deep);margin:0 0 6px;line-height:1.35}
+    h2{font-size:1.1rem;color:var(--deep);margin:28px 0 8px}
+    .banner{background:var(--todo);border-radius:10px;padding:10px 14px;font-size:.92rem;margin-bottom:16px}
+    .range{font-size:clamp(1.6rem,6vw,2.2rem);font-weight:900;color:var(--orange);line-height:1.2;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+    .note{font-size:.88rem;color:var(--muted)}
+    .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+    .net{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:baseline;font-variant-numeric:tabular-nums}
+    .net b{font-size:1.25rem;color:var(--deep)}
+    .diy{background:var(--band);border-left:5px solid var(--orange);padding:10px 14px;border-radius:0 10px 10px 0;margin:12px 0}
+    .tbl{overflow-x:auto;margin-top:8px}
+    table{border-collapse:collapse;width:100%;background:#fff;font-size:.92rem;min-width:520px}
+    th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+    th{font-size:.76rem;letter-spacing:.06em;color:var(--muted);font-weight:500;border-bottom:2px solid var(--line)}
+    td:first-child{font-weight:700;color:var(--deep);white-space:nowrap}
+    tr.me td{background:var(--band)}
+    .btn{display:block;width:100%;text-align:center;padding:18px 20px;border-radius:999px;background:var(--orange);color:#fff;font-weight:800;font-size:1.05rem;text-decoration:none;border:0;cursor:pointer;font-family:inherit;margin-top:14px}
+    .btn:hover{background:#a95f16}
+    .skip{text-align:center;font-size:.9rem;color:var(--muted);margin:10px 0 0}
+    .promise{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}
+    .promise li{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 14px 9px 40px;position:relative;font-size:.93rem}
+    .promise li::before{content:"✓";position:absolute;left:13px;top:8px;color:var(--ok);font-weight:900}
+    .ship dl{margin:0;display:grid;gap:4px}
+    .ship dt{font-size:.75rem;letter-spacing:.08em;color:var(--muted)}
+    .ship dd{margin:0 0 6px;font-weight:700;color:var(--deep)}
+    .ship ol{margin:4px 0 0;padding-left:1.3em;font-size:.93rem}
+    textarea.fallback{width:100%;min-height:120px;font:inherit;font-size:.9rem;padding:8px;border:1px solid var(--line);border-radius:8px;margin-top:8px}
+    .todo{background:var(--todo);padding:0 4px;border-radius:4px}
+    footer{border-top:1px solid var(--line);padding:20px 0 40px;font-size:.85rem;color:var(--muted)}
+    [hidden]{display:none !important}
+    @media (max-width:520px){
+      .net{grid-template-columns:1fr;gap:0}
+      .net > span:nth-child(odd){font-size:.85rem;color:var(--muted);margin-top:8px}
+      .net > span:nth-child(odd):first-child{margin-top:0}
+      .net b{font-size:1.5rem}
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span data-cfg="SERVICE_NAME">ベストプライス</span><small>目安額と、ほかの売り方との比べ方</small></a>
+      <a href="index.html" class="note">トップへ</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section id="rp-notfound" hidden>
+        <h1>レポートが見つかりませんでした</h1>
+        <p>リンクが途中で切れているか、古い形式の可能性があります。同じ内容はメールでもお送りしています。</p>
+        <a class="btn" href="index.html#contact">写真を送り直す（無料）</a>
+      </section>
+
+      <section id="rp-body" hidden>
+        <div id="rp-sample-banner" class="banner" hidden>これは返事の見本です。金額は計算の仕組みを見せるための仮の数字で、相場ではありません。</div>
+
+        <p class="note">お預かり販売の目安額</p>
+        <h1 id="rp-item"></h1>
+        <div class="range" id="rp-range"></div>
+        <p class="note" id="rp-date"></p>
+        <p class="note" id="rp-note" hidden></p>
+
+        <div class="card">
+          <div class="net">
+            <span>お振込み目安（初回・手数料 <span data-cfg-pct="FEE_RATE">20%</span> 込み）</span><b id="rp-net"></b>
+            <span>2回目以降（<span data-cfg-pct="REPEAT_FEE_RATE">17%</span>）なら</span><span id="rp-net-repeat"></span>
+            <span data-monitor>モニター価格（<span data-cfg-pct="MONITOR_FEE_RATE">15%</span>・残り <span data-monitor-left>10</span> 件）なら</span><span data-monitor id="rp-net-monitor"></span>
+          </div>
+          <p class="note" style="margin:8px 0 0">落札 <span data-cfg-yen="BONUS_THRESHOLD">50,000円</span> 以上なら送料分 <span data-cfg-yen="BONUS_AMOUNT">1,000円</span> を上乗せした額です。落札額は業者オークションの結果で決まります。</p>
+        </div>
+
+        <div class="diy" data-diy hidden>この品物は、ご自分でフリマに出した方が手取りが多くなる可能性があります。手間と時間を掛けたくない場合だけ、お送りください。</div>
+
+        <h2>3つの売り方をくらべる</h2>
+        <div class="tbl" id="rp-compare">
+          <table>
+            <thead><tr><th>売り方</th><th>手取り</th><th>日数</th><th>手間</th></tr></thead>
+            <tbody>
+              <tr class="me"><td>業者の競り（うち・お預かり販売）</td><td>落札額 − 手数料（全部込み <span data-cfg-pct="FEE_RATE">20%</span>）。この品なら上の「お振込み目安」の範囲</td><td>発送から通常2〜3週間</td><td>写真6枚と、宅配便1回</td></tr>
+              <tr><td>自分でフリマに出す</td><td>売値 − 各サービスの手数料 − 送料。うちより多く残ることがあります</td><td>売れるまで。数日のことも、数か月のことも</td><td>撮影・出品・質問への返事・値下げ交渉・梱包・発送・受取後の対応をすべてご自身で</td></tr>
+              <tr><td>近くの買取店</td><td>その場で提示される買取額（店ごとに違います）</td><td>当日</td><td>持ち込み。比べるなら複数店へ</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a class="btn" id="rp-send" href="#">この目安で送る（最低希望額を決めて送信）</a>
+        <textarea class="fallback" id="rp-fallback" hidden readonly aria-label="送信用の文面"></textarea>
+        <p class="skip" id="rp-skip">見送る場合は、お返事は不要です。費用はかかりません。</p>
+
+        <h2>送り先と同梱するもの</h2>
+        <div class="card ship" id="rp-ship">
+          <dl>
+            <dt>送り先（元払い）</dt><dd data-cfg="SHIP_TO"></dd>
+          </dl>
+          <ol>
+            <li>品物と付属品</li>
+            <li>本人確認書類のコピー1枚（運転免許証・マイナンバーカード表面・保険証など）</li>
+            <li>振込先口座（本人名義）を書いたメモ</li>
+          </ol>
+          <p class="note" style="margin:8px 0 0">発送したら追跡番号をメールでお知らせください。到着当日に検品して、そのまま出品します。</p>
+        </div>
+
+        <h2>お約束</h2>
+        <ul class="promise" id="rp-promise">
+          <li>最低希望額を下回る場合は落札させず、送料当社負担で返送します</li>
+          <li>到着当日に開封動画を撮って保管します</li>
+          <li>業者からの入金確認後、3営業日以内にお振込み（発送から通常2〜3週間）</li>
+        </ul>
+        <p class="note" style="margin-top:14px">同じ内容をメールでもお送りしています。食い違う場合はメールが正です。始めたばかりで実績の数字はまだ出せません。</p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span data-cfg="COMPANY_NAME"></span> ／ 古物商許可 <span data-cfg="PUBLIC_SAFETY_COMMISSION"></span> 第<span data-cfg="LICENSE_NO"></span>号 ／ <a href="legal.html">法定表示</a>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="site.js"></script>
+  <script src="report-codec.js"></script>
+  <script>
+  (function () {
+    var C = window.BP_CONFIG || {};
+    var yen = function (n) { return Math.round(n).toLocaleString("ja-JP") + "円"; };
+    var $ = function (id) { return document.getElementById(id); };
+    var hash = (location.hash || "").replace(/^#/, "");
+    var p = window.BP_report.decode(hash);
+    if (!p) { $("rp-notfound").hidden = false; return; }
+
+    // 描画（全部 textContent）
+    $("rp-body").hidden = false;
+    $("rp-sample-banner").hidden = !p.sample;
+    $("rp-item").textContent = p.item;
+    $("rp-range").textContent = yen(p.low) + " 〜 " + yen(p.high);
+    $("rp-date").textContent = p.d.replace(/-/g, "/") + " 時点の業者オークション落札相場をもとにした目安です。確定額ではありません。";
+    if (p.note) { $("rp-note").textContent = p.note; $("rp-note").hidden = false; }
+    var calc = window.BP_calc;
+    $("rp-net").textContent = yen(calc(p.low, C.FEE_RATE)) + " 〜 " + yen(calc(p.high, C.FEE_RATE));
+    $("rp-net-repeat").textContent = yen(calc(p.low, C.REPEAT_FEE_RATE)) + " 〜 " + yen(calc(p.high, C.REPEAT_FEE_RATE));
+    $("rp-net-monitor").textContent = yen(calc(p.low, C.MONITOR_FEE_RATE)) + " 〜 " + yen(calc(p.high, C.MONITOR_FEE_RATE));
+    document.querySelectorAll("[data-diy]").forEach(function (el) { el.hidden = !p.diy; });
+    document.title = "目安額 " + p.item + " — " + (C.SERVICE_NAME || "");
+
+    // 送るボタン（C-4）。LINE_URL があれば定型文をコピーして LINE を開く、無ければ mailto。
+    var body = [
+      "【発送のご連絡】",
+      "■ 品物: " + p.item,
+      "■ 目安: " + yen(p.low) + "〜" + yen(p.high) + "（" + p.d.replace(/-/g, "/") + "時点）",
+      "■ 最低希望額: ______円（未記入なら " + yen(p.low) + "）",
+      "■ 発送予定日: ",
+      "■ 追跡番号: （発送後にお送りください）",
+      "■ レポート: " + ((C.SITE_URL || "").replace(/\/?$/, "/") + "report.html#" + hash) // location.href はローカルの serve が .html を省くので使わない
+    ].join("\n");
+    var subject = "発送します【" + p.item + "】";
+    var btn = $("rp-send"), fb = $("rp-fallback");
+    var hasLine = typeof C.LINE_URL === "string" && C.LINE_URL.trim() !== "";
+    var hasMail = typeof C.CONTACT_EMAIL === "string" && C.CONTACT_EMAIL.trim() !== "" && !/^\[.*\]$/.test(C.CONTACT_EMAIL.trim());
+    if (hasLine) {
+      btn.textContent = "この目安で送る（LINEに文面をコピーして開く）";
+      btn.href = C.LINE_URL; btn.target = "_blank"; btn.rel = "noopener";
+      btn.addEventListener("click", function () {
+        var text = subject + "\n" + body;
+        try { navigator.clipboard.writeText(text).catch(function () { fb.value = text; fb.hidden = false; }); }
+        catch (e) { fb.value = text; fb.hidden = false; }
+        // コピーの成否に関わらず遷移は止めない
+      });
+    } else if (hasMail) {
+      btn.href = "mailto:" + C.CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    } else {
+      btn.href = "index.html#contact"; btn.classList.add("todo"); btn.textContent = "受付窓口 準備中";
+    }
+  })();
+  </script>
+</body>
+</html>

@@ -36,5 +36,8 @@ window.BP_CONFIG = {
   MONITOR_ENABLED: true,
   MONITOR_SLOTS: 10,
   MONITOR_FEE_RATE: 0.15,
-  MONITOR_FILLED: 0        // 埋まった件数（手動更新。残り枠を表示する）
+  MONITOR_FILLED: 0,       // 埋まった件数（手動更新。★荷物が到着した当日に更新する。report.html の15%行もこれを見る）
+
+  // --- 目安額レポート（report.html）。LP の「返事の見本を見る」リンクの表示だけを切り替える ---
+  SAMPLE_REPORT_ENABLED: true
 };
