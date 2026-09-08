@@ -51,6 +51,7 @@
     .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:16px;top:14px;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;display:grid;place-items:center}
     .steps b{display:block;color:var(--deep)}
     .steps .t{font-size:.85rem;color:var(--orange);font-weight:700}
+    .sample-link{display:inline-block;margin-top:6px;font-weight:700}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}
     .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
     .card h3{margin:0 0 6px;font-size:1.02rem;color:var(--deep)}
@@ -131,7 +132,7 @@
         <p class="lead">「買取店に持ち込む」代わりに、私たちが業者向けのオークションであなたの代わりに売ります。</p>
         <ol class="steps">
           <li><span class="t">まず</span><b>写真を6枚送る</b>正面・背面・側面・傷のアップ・型番やシリアル・付属品。撮り方は下にあります。</li>
-          <li><span class="t" data-cfg="REPLY_WITHIN">24時間以内</span><b>落札の目安額をお返事</b>直近の業者オークションの落札相場から「○円〜○円」でお伝えします。確定額ではありません。ここで見送ってもOK（0円）。</li>
+          <li><span class="t" data-cfg="REPLY_WITHIN">24時間以内</span><b>落札の目安額をお返事</b>直近の業者オークションの落札相場から「○円〜○円」でお伝えします。確定額ではありません。ここで見送ってもOK（0円）。<a data-sample-report class="sample-link" href="report.html#eyJ2IjoxLCJpdGVtIjoi77yI6KaL5pys77yJ44K544Oe44O844OI44OV44Kp44OzIiwibG93IjozMDAwMCwiaGlnaCI6MzgwMDAsImQiOiIyMDI2LTA5LTA4IiwiZGl5IjpmYWxzZSwibm90ZSI6Iuimi-acrOOBp-OBmeOAgumHkemhjeOBr-S7ruOBruaVsOWtl-OBp-OBmSIsInNhbXBsZSI6dHJ1ZX0">返事の見本を見る →</a></li>
           <li><span class="t">納得したら</span><b>宅配便で送る（元払い）</b>本人確認書類のコピーを同梱してください（法律で決まっています）。追跡番号を教えてもらえれば到着まで見守ります。</li>
           <li><span class="t">到着当日</span><b>開封動画を撮って検品 → 業者オークションに出品</b>写真と違う点があれば、出品前にご相談します。最低希望額を下回った場合は無料で返送します。</li>
           <li><span class="t">落札後</span><b>入金確認から3営業日以内にお振込み</b>落札額から手数料（全部込み <span data-cfg-pct="FEE_RATE">20%</span>）を引いた額を、本人名義の口座へ。明細付きです。発送から通常 2〜3週間です。</li>

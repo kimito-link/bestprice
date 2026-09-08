@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>レポート作成（担当者用） — ベストプライス</title>
+  <!--
+    担当者専用。どこからもリンクしない。品物名・目安・日付・DIY判定・一言 → レポートURL と返事メール本文をコピー。
+    設計: docs/LP-PROFIT-DESIGN.md C-5。氏名・住所・口座の欄は作らない（構造で防ぐ）。
+    禁句（report-codec.js の BANNED）が自由記述に入っていたら作らせない。
+  -->
+  <style>
+    :root{--bg:#fffaf4;--ink:#1f2a37;--muted:#5b6672;--navy:#1c4b7d;--deep:#14375c;--orange:#c8721c;--line:#e8dccb;--bad:#b3261e;--todo:#fff3a0}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.7;font-size:16px}
+    .wrap{max-width:760px;margin:0 auto;padding:24px 20px 60px}
+    h1{font-size:1.3rem;color:var(--deep);margin:0 0 4px}
+    .note{font-size:.88rem;color:var(--muted)}
+    form{display:grid;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:16px}
+    label{font-weight:700;color:var(--deep);font-size:.92rem;display:grid;gap:4px}
+    input[type=text],input[type=number],input[type=date],textarea{font:inherit;padding:8px 10px;border:1.5px solid var(--line);border-radius:8px;width:100%}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .chk{display:flex;gap:8px;align-items:center;font-weight:500}
+    button{font:inherit;font-weight:700;padding:12px 16px;border:0;border-radius:8px;background:var(--orange);color:#fff;cursor:pointer}
+    button.sec{background:var(--navy)}
+    .err{color:var(--bad);font-weight:700;min-height:1.4em;font-size:.92rem}
+    .out{margin-top:18px;display:grid;gap:12px}
+    .out textarea{min-height:120px;font-size:.88rem}
+    .out .url{min-height:64px;word-break:break-all}
+    .ok{color:#2e7d32;font-weight:700;font-size:.9rem}
+    @media (max-width:560px){.row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>目安額レポートを作る（担当者用）</h1>
+    <p class="note">直近の業者オークション落札相場から目安を出し、ここに入れる。出てきたURLと返事の本文をそのままメールに貼る。値段をAIに言わせない。</p>
+
+    <form id="f" autocomplete="off">
+      <label>品物（1〜60文字）<input type="text" id="item" maxlength="60" placeholder="例: iPhone 13 128GB SIMフリー" required /></label>
+      <div class="row">
+        <label>目安の下限（円）<input type="number" id="low" min="1" step="1" required /></label>
+        <label>目安の上限（円）<input type="number" id="high" min="1" step="1" required /></label>
+      </div>
+      <div class="row">
+        <label>目安を出した日<input type="date" id="d" required /></label>
+        <label class="chk" style="align-self:end"><input type="checkbox" id="diy" /> 自分でフリマに出した方が多く残る可能性がある（DIY行を出す）</label>
+      </div>
+      <label>一言（任意・120文字まで。減額の条件など）<textarea id="note" maxlength="120" rows="2" placeholder="例: バッテリー最大容量が85未満だと下がります"></textarea></label>
+      <label class="chk"><input type="checkbox" id="sample" /> 見本として作る（レポートに「見本」バナーが出る）</label>
+      <div class="err" id="err" aria-live="polite"></div>
+      <button type="submit">URLと返事本文を作る</button>
+    </form>
+
+    <div class="out" id="out" hidden>
+      <label>レポートURL<textarea class="url" id="url" readonly></textarea></label>
+      <button type="button" class="sec" data-copy="url">URLをコピー</button>
+      <label>返事メール本文（docs/DESIGN.md §2-1 のテンプレ）<textarea id="mail" readonly rows="16"></textarea></label>
+      <button type="button" class="sec" data-copy="mail">本文をコピー</button>
+      <div class="ok" id="ok"></div>
+    </div>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="../site.js"></script>
+  <script src="../report-codec.js"></script>
+  <script>
+  (function () {
+    var C = window.BP_CONFIG || {};
+    var $ = function (id) { return document.getElementById(id); };
+    var yen = function (n) { return Math.round(n).toLocaleString("ja-JP") + "円"; };
+    var today = new Date(); $("d").value = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, "0") + "-" + String(today.getDate()).padStart(2, "0");
+
+    $("f").addEventListener("submit", function (ev) {
+      ev.preventDefault(); $("err").textContent = ""; $("out").hidden = true; $("ok").textContent = "";
+      var item = $("item").value.trim(), low = Number($("low").value), high = Number($("high").value), d = $("d").value, note = $("note").value.trim();
+      var bad = window.BP_report.findBanned(item + " " + note);
+      if (bad.length) { $("err").textContent = "禁句が入っています: " + bad.join("、") + "（断定・煽り・比較・時限の言葉は書けません）"; return; }
+      if (!(high >= (C.MIN_ESTIMATE || 0))) { $("err").textContent = "受付できない額です（目安の上限が " + yen(C.MIN_ESTIMATE || 0) + " 未満）"; return; }
+      var payload = { v: 1, item: item, low: low, high: high, d: d, diy: $("diy").checked, note: note || undefined, sample: $("sample").checked || undefined };
+      var enc = window.BP_report.encode(payload);
+      if (!window.BP_report.decode(enc)) { $("err").textContent = "入力が範囲外です（下限 > 0、下限 ≤ 上限 ≤ 10,000,000、日付は YYYY-MM-DD）"; return; }
+      var base = (C.SITE_URL || "").replace(/\/?$/, "/");
+      var url = base + "report.html#" + enc;
+      $("url").value = url;
+      var calc = window.BP_calc;
+      var mail = [
+        "お写真ありがとうございます。",
+        "【" + item + "】の業者オークション落札目安は",
+        "",
+        "  " + yen(low) + " 〜 " + yen(high),
+        "",
+        "です（" + d.replace(/-/g, "/") + " 時点の落札相場から見た目安で、確定額ではありません）。",
+        "この場合、お振込みの目安は " + yen(calc(low, C.FEE_RATE)) + " 〜 " + yen(calc(high, C.FEE_RATE)) + " です（手数料" + Math.round((C.FEE_RATE || 0) * 100) + "%込み）。",
+        note ? "※ " + note : null,
+        "",
+        "内訳と、ほかの売り方との比べ方 → " + url,
+        "",
+        "▼ 次のどちらかをお返事ください",
+        "A. 送る（最低希望額: ______円 ※未記入なら " + yen(low) + "）",
+        "B. 今回は見送る（費用はかかりません）",
+        "",
+        "最低希望額を下回った場合は、送料当社負担で無料返送します。",
+        "入金は、落札確定→業者からの入金後 3営業日以内です（発送から通常 2〜3週間）。"
+      ].filter(function (l) { return l !== null; }).join("\n");
+      $("mail").value = mail;
+      $("out").hidden = false;
+    });
+
+    document.querySelectorAll("[data-copy]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var ta = $(b.getAttribute("data-copy"));
+        ta.select();
+        var done = function () { $("ok").textContent = "コピーしました"; };
+        try { navigator.clipboard.writeText(ta.value).then(done, function () { document.execCommand("copy"); done(); }); }
+        catch (e) { document.execCommand("copy"); done(); }
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
