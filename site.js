@@ -114,10 +114,18 @@
   // 3c) 「返事の見本を見る」リンク（config で ON/OFF。送付済みのレポートURLには影響しない）
   document.querySelectorAll("[data-sample-report]").forEach(function (el) { el.hidden = !C.SAMPLE_REPORT_ENABLED; });
 
+  // 3c2) フッターの LINE マーク（textContent を書き換えないよう data-cta とは別扱い）
+  document.querySelectorAll("[data-line-link]").forEach(function (a) {
+    if (!hasLine) { a.hidden = true; return; }
+    a.href = C.LINE_URL; a.target = "_blank"; a.rel = "noopener"; a.hidden = false;
+  });
+
   // 3d) X の公式アカウントへの導線（config に X_URL があるときだけ出す）
   document.querySelectorAll("[data-x-link]").forEach(function (a) {
     if (isBlank(C.X_URL) || isTodo(C.X_URL)) { a.hidden = true; return; }
     a.href = C.X_URL; a.hidden = false;
+    var h = a.querySelector("[data-x-handle]");
+    if (h) { var m = String(C.X_URL).match(/x\.com\/([A-Za-z0-9_]+)/); h.textContent = m ? "@" + m[1] : ""; }
   });
 
   // 4) 電話番号は任意表示
