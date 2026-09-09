@@ -128,6 +128,14 @@
     if (h) { var m = String(C.X_URL).match(/x\.com\/([A-Za-z0-9_]+)/); h.textContent = m ? "@" + m[1] : ""; }
   });
 
+  // 3e) Instagram（config に INSTAGRAM_URL があるときだけ）
+  document.querySelectorAll("[data-ig-link]").forEach(function (a) {
+    if (isBlank(C.INSTAGRAM_URL) || isTodo(C.INSTAGRAM_URL)) { a.hidden = true; return; }
+    a.href = C.INSTAGRAM_URL; a.hidden = false;
+    var h = a.querySelector("[data-ig-handle]");
+    if (h) { var m = String(C.INSTAGRAM_URL).match(/instagram\.com\/([A-Za-z0-9_.]+)/); h.textContent = m ? "@" + m[1] : ""; }
+  });
+
   // 4) 電話番号は任意表示
   document.querySelectorAll("[data-optional='PHONE']").forEach(function (el) {
     if (isBlank(C.PHONE)) el.hidden = true;
