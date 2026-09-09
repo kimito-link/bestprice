@@ -17,7 +17,7 @@ window.BP_CONFIG = {
   LICENSE_NO: "481212600002",
 
   // --- 受付窓口 ---
-  LINE_URL: "https://line.me/R/ti/p/@477clzzf", // ベストプライス｜宅配買取（専用アカウント）
+  LINE_URL: "https://lin.ee/wsOMxGC", // ベストプライス｜宅配買取（@477clzzf）。OA Manager 発行の短縮URL＝「友だち追加経路」で計測できる
   X_URL: "https://x.com/bp_kaitori", // X（旧Twitter）公式。落札額・手数料・振込額の記録を載せる場所
   INSTAGRAM_URL: "https://www.instagram.com/bp_kaitori/", // Instagram 公式。品物の写真と明細
   CONTACT_EMAIL: "info@best-trust.biz",
