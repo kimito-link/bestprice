@@ -18,6 +18,7 @@ window.BP_CONFIG = {
 
   // --- 受付窓口 ---
   LINE_URL: "https://line.me/R/ti/p/@477clzzf", // ベストプライス｜宅配買取（専用アカウント）
+  X_URL: "https://x.com/bp_kaitori", // X（旧Twitter）公式。落札額・手数料・振込額の記録を載せる場所
   CONTACT_EMAIL: "info@best-trust.biz",
   PHONE: "",                         // 任意（空なら表示しない）
   BUSINESS_HOURS: "10:00〜18:00（土日祝を除く）",

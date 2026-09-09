@@ -114,6 +114,12 @@
   // 3c) 「返事の見本を見る」リンク（config で ON/OFF。送付済みのレポートURLには影響しない）
   document.querySelectorAll("[data-sample-report]").forEach(function (el) { el.hidden = !C.SAMPLE_REPORT_ENABLED; });
 
+  // 3d) X の公式アカウントへの導線（config に X_URL があるときだけ出す）
+  document.querySelectorAll("[data-x-link]").forEach(function (a) {
+    if (isBlank(C.X_URL) || isTodo(C.X_URL)) { a.hidden = true; return; }
+    a.href = C.X_URL; a.hidden = false;
+  });
+
   // 4) 電話番号は任意表示
   document.querySelectorAll("[data-optional='PHONE']").forEach(function (el) {
     if (isBlank(C.PHONE)) el.hidden = true;
