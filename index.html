@@ -161,6 +161,11 @@
     #zandebt .zandebt-fig figcaption{margin-top:12px;font-size:.86rem;color:var(--muted);text-align:center}
     #zandebt .zandebt-note{margin-top:22px;font-size:.96rem;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
     @media (max-width:640px){#zandebt .zandebt-grid{grid-template-columns:1fr}}
+    #ig-feed .ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:24px 0 0}
+    #ig-feed .ig-grid a{display:block;position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+    #ig-feed .ig-grid img{width:100%;height:100%;object-fit:cover;display:block}
+    #ig-feed .ig-more{margin-top:20px}
+    @media (max-width:560px){#ig-feed .ig-grid{grid-template-columns:repeat(2,1fr)}}
     details{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin-top:12px;transition:border-color .2s ease,box-shadow .2s ease}
     details[open]{border-color:rgba(36,95,142,.42);box-shadow:0 12px 34px rgba(7,34,57,.07)}
     summary{cursor:pointer;font-weight:800;color:var(--deep);padding-right:34px;position:relative;list-style:none}
@@ -511,6 +516,15 @@
         <details><summary>キャンセルはできますか？</summary><p>出品前ならキャンセルできます。返送料はご負担ください。出品後はキャンセルできません。</p></details>
         <details><summary>長野県以外からでも送れますか？</summary><p>はい。宅配便なので、全国どこからでも同じ流れです。</p></details>
         <details><summary>手数料のほかに費用はかかりますか？</summary><p>発送時の送料はお客様負担です。出品前にキャンセルする場合は、返送料もご負担ください。目安額を見て見送る場合は 0 円です。</p></details>
+      </div>
+    </section>
+
+    <section id="ig-feed" hidden>
+      <div class="wrap">
+        <h2>Instagramで発信中</h2>
+        <p class="lead">売り方の見分け方や、送るときのコツを載せています。</p>
+        <div class="ig-grid" id="ig-grid"></div>
+        <p class="ig-more"><a class="mini soc-ig" data-ig-link href="#" target="_blank" rel="noopener">Instagramで見る</a></p>
       </div>
     </section>
 

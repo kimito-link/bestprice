@@ -136,6 +136,26 @@
     if (h) { var m = String(C.INSTAGRAM_URL).match(/instagram\.com\/([A-Za-z0-9_.]+)/); h.textContent = m ? "@" + m[1] : ""; }
   });
 
+  // 3f) Instagram フィード（/api/instagram から最新投稿を並べる。空ならセクションを隠したまま）
+  (function () {
+    var sec = document.getElementById("ig-feed");
+    var grid = document.getElementById("ig-grid");
+    if (!sec || !grid) return;
+    fetch("/api/instagram").then(function (r) { return r.json(); }).then(function (data) {
+      var items = (data && data.items) || [];
+      if (!items.length) return; // 投稿ゼロ／トークン未設定なら出さない
+      grid.innerHTML = "";
+      items.forEach(function (m) {
+        var a = document.createElement("a");
+        a.href = m.permalink; a.target = "_blank"; a.rel = "noopener";
+        var img = document.createElement("img");
+        img.src = m.image; img.loading = "lazy"; img.alt = (m.caption || "Instagramの投稿").slice(0, 60);
+        a.appendChild(img); grid.appendChild(a);
+      });
+      sec.hidden = false;
+    }).catch(function () { /* 失敗時は隠したまま。LPを壊さない */ });
+  })();
+
   // 4) 電話番号は任意表示
   document.querySelectorAll("[data-optional='PHONE']").forEach(function (el) {
     if (isBlank(C.PHONE)) el.hidden = true;
