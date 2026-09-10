@@ -151,6 +151,16 @@
     .sim .out{display:grid;grid-template-columns:1fr auto;gap:8px 14px;font-size:.96rem;align-items:baseline}
     .sim .out .big{font-size:1.75rem;font-weight:900;color:var(--orange)}
     #photos .checks{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:34px}
+    #zandebt .zandebt-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0}
+    #zandebt .zandebt-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}
+    #zandebt .zandebt-card h3{margin:0 0 8px;font-size:1.05rem;color:var(--deep)}
+    #zandebt .zandebt-card p{margin:0;font-size:.94rem}
+    #zandebt .zandebt-h3{margin:28px 0 12px;font-size:1.1rem;color:var(--deep)}
+    #zandebt .zandebt-fig{margin:0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;overflow-x:auto}
+    #zandebt .zandebt-fig svg{width:100%;max-width:640px;height:auto;color:var(--navy);display:block;margin:0 auto}
+    #zandebt .zandebt-fig figcaption{margin-top:12px;font-size:.86rem;color:var(--muted);text-align:center}
+    #zandebt .zandebt-note{margin-top:22px;font-size:.96rem;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+    @media (max-width:640px){#zandebt .zandebt-grid{grid-template-columns:1fr}}
     details{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin-top:12px;transition:border-color .2s ease,box-shadow .2s ease}
     details[open]{border-color:rgba(36,95,142,.42);box-shadow:0 12px 34px rgba(7,34,57,.07)}
     summary{cursor:pointer;font-weight:800;color:var(--deep);padding-right:34px;position:relative;list-style:none}
@@ -393,7 +403,47 @@
       </div>
     </section>
 
-    <section id="trust" class="band">
+    <section id="zandebt" class="band">
+      <div class="wrap">
+        <h2>分割払いが残っているスマホでも送れます</h2>
+        <p class="lead">「まだ分割が残っているから売れない」と思っている方が多いです。売れるかどうかは、残債の有無ではなく、キャリアの<b>ネットワーク利用制限</b>の判定で決まります。判定が「○」または「−（対象外）」なら受け付けます。</p>
+        <div class="zandebt-grid">
+          <div class="zandebt-card">
+            <h3>制限がかかるのは「キャリアの分割」だけ</h3>
+            <p>ドコモ・au・ソフトバンクなどで分割契約して買った端末は、支払いが止まると回線が止められることがあります。これが「△」や「×」です。</p>
+          </div>
+          <div class="zandebt-card">
+            <h3>Apple直販＋カード/Paidyは「−（対象外）」</h3>
+            <p>Apple公式ストアのSIMフリー機を、カードやPaidyの分割で払っている場合は、キャリアの分割ではないので判定は通常「−」。支払いは残りますが、端末は止まりません。</p>
+          </div>
+        </div>
+        <h3 class="zandebt-h3">自分のがどれかは、IMEIで確かめられます</h3>
+        <figure class="zandebt-fig">
+          <svg viewBox="0 0 640 200" role="img" aria-label="IMEIを4キャリアの確認ページに入れて記号を見る手順の図" xmlns="http://www.w3.org/2000/svg">
+            <rect x="12" y="60" width="150" height="80" rx="10" fill="none" stroke="currentColor" stroke-width="2"/>
+            <text x="87" y="95" text-anchor="middle" font-size="14" fill="currentColor">設定→一般→情報</text>
+            <text x="87" y="118" text-anchor="middle" font-size="13" fill="currentColor">IMEIを控える</text>
+            <line x1="162" y1="100" x2="230" y2="100" stroke="currentColor" stroke-width="2" marker-end="url(#za)"/>
+            <rect x="232" y="60" width="176" height="80" rx="10" fill="none" stroke="currentColor" stroke-width="2"/>
+            <text x="320" y="92" text-anchor="middle" font-size="13" fill="currentColor">4キャリアの</text>
+            <text x="320" y="110" text-anchor="middle" font-size="13" fill="currentColor">利用制限確認ページ</text>
+            <text x="320" y="128" text-anchor="middle" font-size="12" fill="currentColor">にIMEIを入れる</text>
+            <line x1="408" y1="100" x2="470" y2="100" stroke="currentColor" stroke-width="2" marker-end="url(#za)"/>
+            <rect x="472" y="40" width="156" height="120" rx="10" fill="none" stroke="currentColor" stroke-width="2"/>
+            <text x="550" y="66" text-anchor="middle" font-size="13" fill="currentColor">○ 制限なし</text>
+            <text x="550" y="88" text-anchor="middle" font-size="13" fill="currentColor">− 対象外</text>
+            <text x="550" y="110" text-anchor="middle" font-size="13" fill="currentColor">△ 分割支払い中</text>
+            <text x="550" y="132" text-anchor="middle" font-size="13" fill="currentColor">× 制限あり</text>
+            <text x="550" y="152" text-anchor="middle" font-size="11" fill="currentColor">○か−なら送れます</text>
+            <defs><marker id="za" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="currentColor"/></marker></defs>
+          </svg>
+          <figcaption>IMEIを4社の確認ページに入れて、出た記号を見るだけ。どこで買ったか分からなければ4社とも見てください。</figcaption>
+        </figure>
+        <p class="zandebt-note">見方が分からないときは、LINEで「<b>判定</b>」と送ってください。見分け方から順にご案内します。<a class="mini is-line" data-cta data-line-label="LINEで「判定」と送る" href="#contact">LINEで「判定」と送る</a></p>
+      </div>
+    </section>
+
+    <section id="trust">
       <div class="wrap">
         <h2>対面がないからこそ、見えるようにします</h2>
         <div class="promise">
@@ -489,7 +539,7 @@
 
   <footer>
     <div class="wrap">
-      <nav><a href="#flow">流れ</a><a href="#items">送れるもの</a><a href="#fee">手数料</a><a href="#photos">写真の撮り方</a><a href="#more">お店の方へ</a><a href="#faq">よくある質問</a><a href="legal.html">法定表示</a></nav>
+      <nav><a href="#flow">流れ</a><a href="#items">送れるもの</a><a href="#fee">手数料</a><a href="#photos">写真の撮り方</a><a href="#zandebt">分割が残っていても</a><a href="#more">お店の方へ</a><a href="#faq">よくある質問</a><a href="legal.html">法定表示</a></nav>
       <div class="social" aria-label="公式アカウント">
         <a class="soc soc-x" data-x-link href="#" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.9 2H22l-7.2 8.3L23 22h-6.6l-5.2-6.8L5.3 22H2.2l7.7-8.8L2 2h6.8l4.7 6.2L18.9 2zm-1.2 18h1.8L7.4 3.9H5.5L17.7 20z"/></svg><span>X で実績を記録中<small data-x-handle></small></span></a>
         <a class="soc soc-ig" data-ig-link href="#" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.2-.1 1.6-.1 4.8-.1M12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.1 1.4C1.3 2.6.9 3.3.6 4.1.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.3 2.2.6 3 .3.8.7 1.5 1.4 2.1.6.7 1.3 1.1 2.1 1.4.8.3 1.7.5 3 .6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3-.1 2.2-.3 3-.6.8-.3 1.5-.7 2.1-1.4.7-.6 1.1-1.3 1.4-2.1.3-.8.5-1.7.6-3 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.3-2.2-.6-3-.3-.8-.7-1.5-1.4-2.1C21.4 1.3 20.7.9 19.9.6c-.8-.3-1.7-.5-3-.6C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg><span>Instagram<small data-ig-handle></small></span></a>
