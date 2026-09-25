@@ -249,7 +249,7 @@ B. 今回は見送る（費用はかかりません）
 - 許可番号・法人名・公安委員会名をLPの目立つ位置に表示（法定の表示義務でもある）。
 - 「開封動画を撮って保管」「明細を全件公開」「出品先の種別を明記」の3つを**約束として書く**。
 - 盗品防止に協力している旨（本人確認を必ず行う）を明記する。「怪しい人が来ない」効果もある。
-- **URL届出の対象**: LP（bestprice-kaitori.com）に加え、**ジモティーの法人プロフィールURL（jmty.jp/profiles/…）**も取引に使うURLとして届け出る（2026-09-25 追記。疎明はプロフィールページの印刷）。
+- **URL届出の対象**: LP（bestprice-kaitori.com）に加え、**ジモティーの法人プロフィールURL https://jmty.jp/profiles/5a366c28c4aa477fbf5a724a** も取引に使うURLとして届け出る（2026-09-25 追記。疎明はプロフィールページの印刷）。初投稿: https://jmty.jp/nagano/ser-recy/article-1s2uvh（2026-09-25・iPhone）／https://jmty.jp/nagano/ser-recy/article-1s2vlo（同日・ノートPC）。台帳は `BRIDGE-LEDGER.md`。
 
 ---
 
