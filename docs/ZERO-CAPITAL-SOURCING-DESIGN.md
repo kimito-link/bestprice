@@ -54,13 +54,12 @@
   利用停止になった通知が Gmail に残っている。代行＝自動問い合わせは同じ穴。今の法人認証済みアカウントで踏まない
 - 入力は本人宛の公式通知メールだけ。投稿ページを機械が取りに行かない
 
-**配線（人がやる・1回）**
-1. ジモティーにログイン → 長野の「売ります・あげます」×「無料」一覧 → 「新着投稿の通知をメールで受け取る」を登録
-2. Gmail: `from:jmty.jp` を notify@kimitotalk.link へ転送するフィルタ
-3. line-bot の `email_forward_rules` に `{ "site": "ジモティー/0円", "match": { "from": "jmty.jp", "subjectContainsAll": ["ジモティー"] } }`
-   （`scripts/build-forward-rules-sql.mjs` → D1）
-4. `email_forward_targets` に `sites: ["ジモティー/0円"]` で「キミにお知らせ｜フリマ」の accountId と自分の friendId
-5. worker をデプロイ → 最初の1通で `email_events.detail` の「解析N件」を見る
+**配線（2026-10-04 に全部済み）**
+1. ジモティーの新着投稿通知: 長野の0円一覧（jmty.jp/nagano/sale?max=0&min=0）の「新着投稿の通知をメールで受け取る」モーダルで登録。**ログイン不要・メールアドレス欄に notify@kimitotalk.link を直接入れる**ので Gmail の転送フィルタは要らない（line-bot手順書の「方法1」）。市区郡は1条件に1つなので、岡谷市・諏訪市・茅野市・塩尻市・諏訪郡 ×「無料の商品」の5条件を登録した。「ジモティーメルマガにも登録する」は外す。
+   ★マイページの通知設定（/my/email_notifications）には新着投稿の項目は無い（そこは自分の投稿へのメッセージ等）。
+   ★同じ5条件を info@best-trust.biz 宛でも先に登録してしまった。Gmail転送は作らないので二重には届かないが、info@ の受信箱に同じ通知が来る。要らなければ届いたメールの配信停止リンクで消す。
+2. line-bot: `data/email-forward-rules-jimoty.json`（site「ジモティー/0円」）を Set Email Forward Rules で投入済み（39→40件）。Set Email Forward Targets でフリマ宛に「ジモティー/0円」を追加済み（PR #21）。worker は PR #20 マージで本番デプロイ済み。
+3. 残り: 最初の1通で `email_events.detail` の「解析N件」を見る
 
 **未確認（最初の1通で確かめる）**
 - 新着投稿の通知メールの**本文の書式**。パーサはメルマガの実物（`【0円】タイトル` の次の行にURL）と
