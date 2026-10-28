@@ -217,7 +217,7 @@
     };
     if (lineIdOk) {
       var sendText = clipLineText(text);
-      btn.textContent = "この目安で送る（LINEに文面を入れて開く）";
+      btn.textContent = "この目安でLINEを開く";
       btn.href = "https://line.me/R/oaMessage/" + lineId + "/?" + encodeURIComponent(sendText);
       if (sendText !== text) {
         fb.value = text; fb.hidden = false;
