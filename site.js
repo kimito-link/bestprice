@@ -1,9 +1,37 @@
-// index.html / legal.html 共通。config.js の値を画面へ流し込むだけ（ロジックは持たない）。
+// index.html / legal.html / report.html 共通。config.js の値を画面へ流し込む。
+// LINEのアプリ内ブラウザでは、外向きリンクに openExternalBrowser=1 を足す（友だち追加の lin.ee はそのまま）。
 (function () {
   var C = window.BP_CONFIG || {};
   var isTodo = function (v) { return typeof v === "string" && /^\[.*\]$/.test(v.trim()); };
   var isBlank = function (v) { return v == null || String(v).trim() === ""; };
   var yen = function (n) { return Math.round(n).toLocaleString("ja-JP") + "円"; };
+
+  // LINEのアプリ内ブラウザ（UA に Line/）で見たときだけ、外向きの http(s) に
+  // openExternalBrowser=1 を足す。#fragment は残す。公式URLを計測用の別URLには差し替えない。
+  // それ以外のブラウザでは公式URLのまま（ユニバーサルリンクが働く）。
+  // lin.ee（友だち追加）と line.me（LINEアプリを開くURL）には足さない。
+  var inLineBrowser = /Line\//.test(navigator.userAgent || "");
+  function hrefOutsideLine(url) {
+    if (!inLineBrowser || isBlank(url)) return url;
+    var raw = String(url).trim();
+    if (raw.charAt(0) === "#") return url;
+    var u;
+    try { u = new URL(raw, location.href); } catch (e) { return url; }
+    if (u.protocol !== "http:" && u.protocol !== "https:") return url;
+    var host = u.hostname.toLowerCase();
+    if (host === "lin.ee" || (host.length > 7 && host.slice(-7) === ".lin.ee")) return url;
+    if (host === "line.me" || (host.length > 8 && host.slice(-8) === ".line.me")) return url;
+    if (host === String(location.hostname || "").toLowerCase()) return url;
+    if (u.searchParams.get("openExternalBrowser") === "1") return url;
+    if (!isBlank(C.LINE_URL)) {
+      try {
+        var friend = new URL(String(C.LINE_URL).trim(), location.href);
+        if (u.origin === friend.origin && u.pathname === friend.pathname) return url;
+      } catch (e2) { /* 設定がURLでなければホスト判定だけ */ }
+    }
+    u.searchParams.set("openExternalBrowser", "1");
+    return u.toString();
+  }
 
   // 1) data-cfg="KEY" の要素にテキストを流し込む。未記入は黄色で見せる。
   document.querySelectorAll("[data-cfg]").forEach(function (el) {
@@ -147,7 +175,7 @@
       grid.innerHTML = "";
       items.forEach(function (m) {
         var a = document.createElement("a");
-        a.href = m.permalink; a.target = "_blank"; a.rel = "noopener";
+        a.href = hrefOutsideLine(m.permalink); a.target = "_blank"; a.rel = "noopener";
         var img = document.createElement("img");
         img.src = m.image; img.loading = "lazy"; img.alt = (m.caption || "Instagramの投稿").slice(0, 60);
         a.appendChild(img); grid.appendChild(a);
@@ -155,6 +183,15 @@
       sec.hidden = false;
     }).catch(function () { /* 失敗時は隠したまま。LPを壊さない */ });
   })();
+
+  // 3g) いまページにある外向きリンク（X・Instagram・他サイト）。友だち追加とサイト内はそのまま。
+  if (inLineBrowser) {
+    document.querySelectorAll("a[href]").forEach(function (a) {
+      var raw = a.getAttribute("href");
+      var next = hrefOutsideLine(raw);
+      if (typeof next === "string" && next !== raw) a.setAttribute("href", next);
+    });
+  }
 
   // 4) 電話番号は任意表示
   document.querySelectorAll("[data-optional='PHONE']").forEach(function (el) {
