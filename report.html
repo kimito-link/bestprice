@@ -109,8 +109,9 @@
           </table>
         </div>
 
-        <a class="btn" id="rp-send" href="#">この目安で送る（最低希望額を決めて送信）</a>
+        <p class="note" id="rp-line-long" hidden>LINEに一度に入る文面は1,000文字までです。超えた行は下に全文を出しています。送る前に、足りない行をコピーして貼れます。</p>
         <textarea class="fallback" id="rp-fallback" hidden readonly aria-label="送信用の文面"></textarea>
+        <a class="btn" id="rp-send" href="#">この目安で送る（最低希望額を決めて送信）</a>
         <p class="skip" id="rp-skip">見送る場合は、お返事は不要です。費用はかかりません。</p>
 
         <h2>送り先と同梱するもの</h2>
@@ -169,7 +170,9 @@
     document.querySelectorAll("[data-diy]").forEach(function (el) { el.hidden = !p.diy; });
     document.title = "目安額 " + p.item + " — " + (C.SERVICE_NAME || "");
 
-    // 送るボタン（C-4）。LINE_URL があれば定型文をコピーして LINE を開く、無ければ mailto。
+    // 送るボタン（C-4）。公式アカウントIDがあれば、文面を入れたトークを直接開く。
+    // https://line.me/R/oaMessage/@ID/?{URLエンコードした文面}
+    // 友だち追加の lin.ee は文面を載せられないので、ここでは使わない。
     var body = [
       "【発送のご連絡】",
       "■ 品物: " + p.item,
@@ -180,17 +183,52 @@
       "■ レポート: " + ((C.SITE_URL || "").replace(/\/?$/, "/") + "report.html#" + hash) // location.href はローカルの serve が .html を省くので使わない
     ].join("\n");
     var subject = "発送します【" + p.item + "】";
+    var text = subject + "\n" + body;
     var btn = $("rp-send"), fb = $("rp-fallback");
-    var hasLine = typeof C.LINE_URL === "string" && C.LINE_URL.trim() !== "";
+    var lineId = typeof C.LINE_ID === "string" ? C.LINE_ID.trim() : "";
+    if (lineId && lineId.charAt(0) !== "@") lineId = "@" + lineId;
+    var lineIdOk = /^@[A-Za-z0-9._-]{1,32}$/.test(lineId);
+    var hasLineUrl = typeof C.LINE_URL === "string" && C.LINE_URL.trim() !== "";
     var hasMail = typeof C.CONTACT_EMAIL === "string" && C.CONTACT_EMAIL.trim() !== "" && !/^\[.*\]$/.test(C.CONTACT_EMAIL.trim());
-    if (hasLine) {
+    // 文面は1,000文字まで（LINEの oaMessage）。超えるときは空欄の行から外し、件名とレポートURLは残す。
+    var clipLineText = function (full) {
+      var max = 1000;
+      if (full.length <= max) return full;
+      var lines = full.split("\n");
+      var report = lines[lines.length - 1];
+      var kept = lines.slice(0, -1);
+      var rank = function (line) {
+        if (line.indexOf("【発送のご連絡】") === 0) return 0;
+        if (line.indexOf("■ 発送予定日") === 0) return 1;
+        if (line.indexOf("■ 追跡番号") === 0) return 2;
+        if (line.indexOf("■ 最低希望額") === 0) return 3;
+        if (line.indexOf("■ 目安") === 0) return 4;
+        if (line.indexOf("■ 品物") === 0) return 5;
+        return 9;
+      };
+      while (kept.length && (kept.join("\n").length + 1 + report.length) > max) {
+        var idx = 0;
+        for (var i = 1; i < kept.length; i++) if (rank(kept[i]) < rank(kept[idx])) idx = i;
+        kept.splice(idx, 1);
+      }
+      if (kept.length && (kept.join("\n").length + 1 + report.length) <= max) return kept.join("\n") + "\n" + report;
+      if (report.length <= max) return report;
+      return report.slice(0, max);
+    };
+    if (lineIdOk) {
+      var sendText = clipLineText(text);
+      btn.textContent = "この目安でLINEを開く";
+      btn.href = "https://line.me/R/oaMessage/" + lineId + "/?" + encodeURIComponent(sendText);
+      if (sendText !== text) {
+        fb.value = text; fb.hidden = false;
+        var longNote = $("rp-line-long"); if (longNote) longNote.hidden = false;
+      }
+    } else if (hasLineUrl) {
       btn.textContent = "この目安で送る（LINEに文面をコピーして開く）";
       btn.href = C.LINE_URL; btn.target = "_blank"; btn.rel = "noopener";
       btn.addEventListener("click", function () {
-        var text = subject + "\n" + body;
         try { navigator.clipboard.writeText(text).catch(function () { fb.value = text; fb.hidden = false; }); }
         catch (e) { fb.value = text; fb.hidden = false; }
-        // コピーの成否に関わらず遷移は止めない
       });
     } else if (hasMail) {
       btn.href = "mailto:" + C.CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
