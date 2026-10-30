@@ -10,7 +10,7 @@ window.BP_CONFIG = {
 
   // --- 事業者（古物営業法の表示義務・特商法表記に使う） ---
   COMPANY_NAME: "株式会社ベストトラスト",
-  REPRESENTATIVE: "小林孝至",
+  REPRESENTATIVE: "株式会社ベストトラスト（責任者の氏名は、ご請求があれば遅滞なく開示します）",
   ADDRESS: "長野県岡谷市長地柴宮二丁目5番65号",
   SHIP_TO: "長野県岡谷市長地柴宮二丁目5番65号 株式会社ベストトラスト 宛",
   PUBLIC_SAFETY_COMMISSION: "長野県公安委員会",
