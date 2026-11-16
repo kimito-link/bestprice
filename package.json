@@ -1,0 +1,8 @@
+{
+  "name": "bestprice",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:pages": "node -e \"const fs=require('fs'),path=require('path');const skip=new Set(['pages-404.html','.claude','.git','.github','.wrangler','docs','.gitignore','.mcp.json','.vercel','api','dist','functions','node_modules','package.json','README.md','vercel.json','wrangler.toml']);fs.rmSync('dist',{recursive:true,force:true});fs.mkdirSync('dist',{recursive:true});for(const e of fs.readdirSync('.'))if(!skip.has(e))fs.cpSync(e,path.join('dist',e),{recursive:true});fs.copyFileSync('pages-404.html','dist/404.html');\""
+  }
+}
